@@ -1,0 +1,6 @@
+# Archivos de trabajo de la skill design-taste-frontend (capturas y chequeos)
+.taste-skill/
+shots/
+node_modules/
+.DS_Store
+Thumbs.db

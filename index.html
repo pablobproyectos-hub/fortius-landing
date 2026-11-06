@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="es" data-type="software" data-radius="soft" data-ground="sage" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fortius: software para gimnasios y sus profes</title>
+<meta name="description" content="Fortius es el software para gimnasios: rutinas desde tu catálogo con un QR por rutina, cuotas que vencen a los 30 días del pago, estadísticas de asistencia e informe mensual en PDF.">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="icon" type="image/svg+xml" href="assets/app/fortius.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..600&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #f4f1ec; --p-surface: #e9e4dc; --p-ink: #1c1714; --p-muted: #463f39;
+  --p-accent: #e8590c; --p-accent-ink: #111111; --p-action: #e8590c; --p-action-ink: #111111;
+  --p-inv-bg: #1c1714; --p-inv-surface: #282320; --p-inv-ink: #f4f1ec; --p-inv-muted: #c4bfb9;
+  --p-inv-accent: #e8590c; --p-inv-accent-ink: #111111; --p-inv-action: #e8590c; --p-inv-action-ink: #111111;
+  --font-display: "Mona Sans", system-ui, sans-serif;
+  --font-text: "Mona Sans", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --display-stretch: 104%;
+  --ly-scale: 0.96;
+}
+</style>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<!-- page CSS: only what sits inside a visual -->
+<style>
+  /* el logo de Fortius (mismo trazo que la app) */
+  .nav__logo svg, .footer__mark svg { width: 28px; height: 28px; flex: none; }
+  .nav__logo, .footer__mark { display: inline-flex; align-items: center; gap: 10px; }
+
+  /* hero: la ventana del panel real del entrenador sobre el fondo iluminado */
+  .hero__window .shot { display: block; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px rgb(0 0 0 / .35), 0 30px 60px -24px rgb(28 23 20 / .55); }
+  .hero__window .ly-piece { width: min(100% - 48px, 1100px); }
+  @media (max-width: 639px) { .hero__window .ly-piece { width: min(100% - 48px, 300px); } }
+
+  /* app-frame: la app real de Fortius como HTML vivo (sus colores: #121212, #1b1b1b, naranja #ff5a1f) */
+  .app.ui { --u-bg: #121212; --u-border: #333; --u-line: #2b2b2b; --u-r: 16px; --u-shadow: 0 30px 60px -28px rgb(28 23 20 / .5);
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); margin-top: var(--s-7); background: var(--u-bg); border: 1px solid var(--u-border); border-radius: var(--u-r); box-shadow: var(--u-shadow); color: #f5f5f0; font: 400 15px/1.4 var(--font-text); }
+  .app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+  .app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+  .app > .app__pane::after { content: ""; position: absolute; inset: auto 0 0 0; height: 64px; background: linear-gradient(transparent, var(--u-bg)); pointer-events: none; }
+  .fx-bar { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px; border-bottom: 1px solid var(--u-line); background: #1b1b1b; }
+  .fx-bar b { font-weight: 600; } .fx-bar .sp { flex: 1; } .fx-bar small { color: #a3a3a3; font-size: 13px; }
+  .fx-busca { margin: 14px 18px 6px; height: 40px; border-radius: 8px; background: #232323; border: 1px solid #333; display: flex; align-items: center; padding: 0 14px; color: #929292; font-size: 14px; }
+  .fx-fila { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 18px; border-bottom: 1px solid var(--u-line); }
+  .fx-fila b { font-weight: 600; grid-column: 1; } .fx-fila > span:not(.fx-chip) { color: #a3a3a3; font-size: 13px; grid-column: 1; }
+  .fx-fila.is-on { background: #1f1a17; box-shadow: inset 3px 0 0 #ff5a1f; }
+  .fx-fila > .fx-chip { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 99px; }
+  .fx-chip--ok { background: rgb(52 211 153 / .16); color: #34d399; }
+  .fx-chip--venc { background: rgb(255 92 92 / .14); color: #ff7a7a; }
+  .fx-chip--pv { background: rgb(255 90 31 / .16); color: #ff8a5c; }
+  .fx-abierto { padding: 22px 26px; display: grid; gap: 18px; align-content: start; }
+  .fx-abierto h3 { font: 600 26px/1.1 var(--font-display); margin: 0; }
+  .fx-meta { color: #a3a3a3; font-size: 14px; margin-top: -10px; }
+  .fx-tarjeta { background: #1b1b1b; border: 1px solid #333; border-radius: 14px; padding: 18px 20px; display: grid; gap: 14px; }
+  .fx-tarjeta h4 { margin: 0; font: 600 18px/1.2 var(--font-display); }
+  .fx-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fx-campo { display: grid; gap: 6px; font-size: 13px; color: #a3a3a3; }
+  .fx-campo div { height: 44px; border-radius: 8px; background: #232323; border: 1px solid #333; display: flex; align-items: center; padding: 0 14px; color: #f5f5f0; font-size: 16px; }
+  .fx-botones { display: flex; gap: 10px; flex-wrap: wrap; }
+  .fx-btn { height: 44px; padding: 0 18px; border-radius: 12px; display: inline-flex; align-items: center; font-weight: 600; font-size: 15px; background: #232323; border: 1px solid #333; }
+  .fx-txt { display: inline-flex; align-items: center; height: 44px; color: #a3a3a3; font-size: 15px; }
+  .fx-btn--primario { background: #ff5a1f; border-color: #ff5a1f; color: #1a0900; }
+  .fx-pagos { display: grid; } .fx-pagos div { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #2b2b2b; font-size: 14px; }
+  .fx-pagos div span { color: #a3a3a3; } .fx-pagos div.is-new { color: #fff; } .fx-pagos div.is-new span { color: #34d399; }
+  @media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
+  @media (max-width: 1023px) {
+    .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+    .app > .app__pane--list { max-height: 252px; }
+    .app > .app__pane--list::after { display: none; }
+    .app > .app__pane + .app__pane { border-left: 0; border-top: 1px solid var(--u-line); }
+  }
+  @media (max-width: 639px) {
+    .app.ui { grid-template-rows: minmax(0, 1fr); }
+    .app > .app__pane--list { display: none; }
+    .app > .app__pane + .app__pane { border-top: 0; }
+    .fx-campos { grid-template-columns: 1fr; }
+  }
+
+  /* pasos: capturas reales de la app en el panel de cada tarjeta */
+  #rutinas .panel { --p-h: 336px; background: #121212; }
+  @media (min-width: 640px) and (max-width: 1023px) { #rutinas { --h: 2; } }
+  @media (min-width: 1024px) { #rutinas .grid > .card { grid-column: auto / span 4; } }
+  @media (max-width: 639px) { #rutinas .panel { --p-h: 260px; } }
+  #rutinas .panel .frame__img { object-fit: cover; object-position: left top; }
+
+  /* en el celular las preguntas entran en una pantalla: sin la bajada ni la pregunta de la PC */
+  @media (max-width: 639px) { #preguntas .faq-intro, #preguntas .faq__item:nth-child(5) { display: none; } }
+
+  /* splits: la bajada arranca a la altura del tope de las letras del título */
+  #panel .grid--top > p, #informes .grid--top > p { margin-top: 0; padding-top: 9px; }
+
+  /* capítulo: la pantalla de Informes, cortada por el marco */
+  #informes .frame__img { object-fit: cover; object-position: top left; }
+</style>
+</head>
+<body>
+<!-- type: software
+     deal: hero centred, nav nav-centre (nav-cards redealt: no photographs), close close-type, footer footer-columns,
+           rhythm dark-band (the chapter), buttons solid, mark: the client's own logo (the F from the app), ground sage,
+           effect grain-gradient in the hero window, moments none
+     screens: hero 1 · panel (app-frame) 1 · rutinas (steps) 1 · informes (chapter, dark band) 1 · preguntas (faq) 1 · footer.closing 1 -->
+
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="nav__logo" href="#top" aria-label="Fortius, inicio">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="nav-f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A24"/><stop offset="1" stop-color="#FF4E00"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="#16110E"/><g transform="translate(256 256) skewX(-6) translate(-256 -256) translate(0 -8) translate(256 256) scale(1.18) translate(-256 -256)"><path d="M148 400 L148 112 L384 112 L350 178 L222 178 L222 234 L330 234 L302 292 L222 292 L222 400 Z" fill="url(#nav-f)"/></g></svg>Fortius</a>
+    <nav class="nav__links" aria-label="Principal">
+      <div class="nav__item"><a class="nav__link" href="#panel">Panel</a></div>
+      <div class="nav__item"><a class="nav__link" href="#rutinas">Rutinas</a></div>
+      <div class="nav__item"><a class="nav__link" href="#informes">Informes</a></div>
+      <div class="nav__item"><a class="nav__link" href="#preguntas">Preguntas</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="mailto:hola@fortius.example?subject=Demo%20de%20Fortius">Pedí una demo</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--centred" aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__c">
+        <a class="pill" href="#rutinas"><span>Nuevo: un QR por rutina</span><span class="muted">Ver cómo funciona</span></a>
+        <h1 id="hero-h">Software para gimnasios y sus profes</h1>
+        <p class="hero__lead">El profe arma la rutina desde su catálogo y el alumno la abre con un QR. Vos cobrás y la cuota vence sola a los 30 días.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="mailto:hola@fortius.example?subject=Demo%20de%20Fortius">Pedí una demo<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
+      </div>
+      <div class="hero__window" data-fx="grain-gradient" data-fx-seed="11" role="img" aria-label="El panel de Estadísticas de Fortius: entrenaron hoy, cuotas vencidas y el ejercicio más usado">
+        <div class="ly-piece" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 639px)" srcset="assets/app/mis-rutinas.webp" width="640" height="690">
+            <img class="shot" src="assets/app/estadisticas.webp" alt="" width="1760" height="1100" fetchpriority="high" data-source="client" data-subject="Fortius, pantalla de Estadísticas">
+          </picture>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="panel" aria-labelledby="panel-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="panel-h">Cada alumno, su cuota y sus rutinas</h2>
+        <p class="span-6 start-7 muted">Buscás al alumno, ves si la cuota está al día y marcás el pago con el precio de su plan ya cargado. <a class="link" href="#preguntas">Ver cómo se cobra</a></p>
+      </div>
+      <div class="ui app fill" data-visual role="img" aria-label="La lista de alumnos con el estado de su cuota y el perfil de Diego Ruiz con el pago de hoy marcado">
+        <div class="app__pane app__pane--list" aria-hidden="true">
+          <div class="fx-bar"><b>Clientes</b><span class="sp"></span><small>100 activos</small></div>
+          <div class="fx-busca">Buscar por nombre</div>
+          <div class="fx-fila is-on"><b>Diego Ruiz</b><span>Fijo, 3 días por semana</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Sofía Paz</b><span>Pase libre</span><span class="fx-chip fx-chip--venc">Vencida</span></div>
+          <div class="fx-fila"><b>Lucía Fernández</b><span>Fijo, 3 días por semana</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Tomás Gil</b><span>Fijo, 2 días por semana</span><span class="fx-chip fx-chip--venc">Vencida</span></div>
+          <div class="fx-fila"><b>Martina Ríos</b><span>Fijo, 4 días por semana</span><span class="fx-chip fx-chip--pv">Vence en 3 días</span></div>
+          <div class="fx-fila"><b>Nicolás Vega</b><span>Pase libre</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Camila Sosa</b><span>Fijo, 2 días por semana</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Julián Moreno</b><span>Fijo, 3 días por semana</span><span class="fx-chip fx-chip--pv">Vence en 6 días</span></div>
+          <div class="fx-fila"><b>Valentina Luna</b><span>Pase libre</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+        </div>
+        <div class="app__pane app__pane--open" aria-hidden="true">
+          <div class="fx-bar"><b>Diego Ruiz</b><span class="sp"></span><small>Documento 32456789</small></div>
+          <div class="fx-abierto">
+            <div class="fx-tarjeta">
+              <h4>Cuota</h4>
+              <div class="fx-campos">
+                <div class="fx-campo">Monto cobrado ($)<div>40000</div></div>
+                <div class="fx-campo">Método de pago<div>Transferencia</div></div>
+              </div>
+              <div class="fx-botones"><span class="fx-btn fx-btn--primario">Marcar como pagado</span><span class="fx-txt">Deshacer último pago</span></div>
+              <div class="fx-pagos">
+                <div class="is-new">05/11/2026<span>$ 40.000 · Transferencia</span></div>
+                <div>02/10/2026<span>$ 40.000 · Efectivo</span></div>
+                <div>01/09/2026<span>$ 38.000 · Efectivo</span></div>
+                <div>01/08/2026<span>$ 38.000 · Efectivo</span></div>
+              </div>
+            </div>
+            <div class="fx-tarjeta">
+              <h4>Rutinas (1/3)</h4>
+              <div class="fx-pagos"><div>Rutina 1 · Full body<span>QR · Archivar</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rutinas" style="--hm: 2" aria-labelledby="rutinas-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="rutinas-h">Una rutina en 3 pasos</h2>
+      </div>
+      <div class="grid">
+        <article class="card card--row span-4">
+          <span class="step-num">1</span>
+          <h3>Armás la rutina desde tu catálogo</h3>
+          <p>Elegís la categoría y el ejercicio, con series, repeticiones y descanso.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/rutina-catalogo.webp" alt="El formulario para agregar un ejercicio: categoría Pecho, Aperturas con mancuernas, 3 series de 12" width="640" height="607" loading="lazy" data-source="client" data-subject="Fortius, agregar ejercicio"></div>
+        </article>
+        <article class="card card--row span-4">
+          <span class="step-num">2</span>
+          <h3>Le das el QR de esa rutina</h3>
+          <p>Cada rutina tiene su QR. El alumno pone su documento la primera vez.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/rutina-qr.webp" alt="El QR de la Rutina 1, Pecho y espalda" width="640" height="514" loading="lazy" data-source="client" data-subject="Fortius, QR de una rutina"></div>
+        </article>
+        <article class="card card--row span-4">
+          <span class="step-num">3</span>
+          <h3>El alumno anota sus pesos</h3>
+          <p>Sube el peso con un toque y su progreso queda guardado.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/rutina-pesos.webp" alt="Press de banca en el celular del alumno: 62,5 kg y 12 repeticiones" width="640" height="621" loading="lazy" data-source="client" data-subject="Fortius, carga de pesos del alumno"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="informes" aria-labelledby="informes-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="informes-h">Estadísticas e informe del mes</h2>
+        <p class="span-6 start-7 muted">Quién entrenó hoy, quién debe la cuota y quién dejó de venir. Cada mes se cierra solo en un informe que bajás en PDF. <a class="link" href="#preguntas">Ver qué incluye</a></p>
+      </div>
+      <div class="frame frame--hero fill" style="margin-top: var(--s-8)">
+        <img class="frame__img" src="assets/app/informes.webp" alt="La pantalla de Informes de Fortius con noviembre en curso y los meses cerrados para descargar en PDF" width="1760" height="794" loading="lazy" data-source="client" data-subject="Fortius, pantalla de Informes">
+      </div>
+      <div class="grid" style="margin-top: var(--s-7)">
+        <div class="span-3"><p class="t-card">Entrenaron hoy</p><p class="muted">Y en lo que va de la semana.</p></div>
+        <div class="span-3"><p class="t-card">Cuotas vencidas</p><p class="muted">Y las que vencen en 7 días.</p></div>
+        <div class="span-3"><p class="t-card">Racha de entrenamiento</p><p class="muted">Semanas seguidas de cada alumno.</p></div>
+        <div class="span-3"><p class="t-card">Informe en PDF</p><p class="muted">Activos, asistencia y lo cobrado.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="preguntas" aria-labelledby="preguntas-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-6 stack-4">
+          <h2 id="preguntas-h">Preguntas frecuentes</h2>
+          <p class="muted faq-intro">Lo que nos preguntan los dueños antes de empezar.</p>
+          <a class="link" href="mailto:hola@fortius.example?subject=Consulta%20sobre%20Fortius">Escribinos tu pregunta</a>
+        </div>
+        <div class="faq span-6 start-7">
+          <div class="faq__item"><h3>¿Mis alumnos tienen que instalar una app?</h3><p>No. Se abre en el navegador del celular al escanear el QR.</p></div>
+          <div class="faq__item"><h3>¿Cómo entra el alumno la primera vez?</h3><p>Pone su documento una vez y entra directo durante 30 días.</p></div>
+          <div class="faq__item"><h3>¿Cómo sé quién debe la cuota?</h3><p>Vence 30 días después del último pago y aparece en Cuotas vencidas.</p></div>
+          <div class="faq__item"><h3>¿Puedo cargar mis propios ejercicios?</h3><p>Sí. El catálogo es de tu gimnasio, con categorías y video.</p></div>
+          <div class="faq__item"><h3>¿Funciona en la PC del gimnasio?</h3><p>Sí. El panel anda en el navegador de la PC o del celular del profe.</p></div>
+          <div class="faq__item"><h3>¿Puede haber varios entrenadores?</h3><p>Sí. Cada profe entra con su cuenta y ve los mismos alumnos.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Probá Fortius en tu gimnasio</h2>
+        <p class="t-small muted">Te mostramos la app con tus planes y tus ejercicios.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="mailto:hola@fortius.example?subject=Demo%20de%20Fortius">Pedí una demo<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top" aria-label="Fortius, inicio">
+            <svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="foot-f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A24"/><stop offset="1" stop-color="#FF4E00"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="#16110E"/><g transform="translate(256 256) skewX(-6) translate(-256 -256) translate(0 -8) translate(256 256) scale(1.18) translate(-256 -256)"><path d="M148 400 L148 112 L384 112 L350 178 L222 178 L222 234 L330 234 L302 292 L222 292 L222 400 Z" fill="url(#foot-f)"/></g></svg>Fortius</a>
+          <p class="footer__lede">Rutinas, cuotas y asistencia de tu gimnasio.</p>
+        </div>
+        <div class="span-2 footer__col"><h4>Panel</h4><ul><li><a href="#panel">Alumnos</a></li><li><a href="#panel">Cuotas</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Informes</h4><ul><li><a href="#informes">Estadísticas</a></li><li><a href="#informes">Informe mensual</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Preguntas</h4><ul><li><a href="#preguntas">Frecuentes</a></li><li><a href="#contact">Contacto</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Fortius</span>
+        <div class="socials"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+</body>
+</html>
