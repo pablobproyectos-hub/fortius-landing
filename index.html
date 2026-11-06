@@ -96,6 +96,10 @@
   @media (min-width: 1024px) and (max-width: 1279px) { #rutinas .panel { --p-h: 250px; } }
   @media (max-width: 639px) { #rutinas .panel { --p-h: 260px; } }
   #rutinas .panel .frame__img { object-fit: cover; object-position: left top; }
+  /* el QR entero, centrado sobre el mismo fondo del modal de la app (antes el recorte lo cortaba a la derecha) */
+  #rutinas .panel--qr { background: #1b1b1b; }
+  #rutinas .panel--qr .frame__img { object-fit: contain; object-position: center; }
+  .footer__col a { overflow-wrap: anywhere; }
 
   /* en el celular y entre 1024 y 1279px las preguntas entran en una pantalla: sin la bajada ni la del catálogo (ya está en Precio) */
   @media (max-width: 639px), (min-width: 1024px) and (max-width: 1279px) { #preguntas .faq-intro, #preguntas .faq__item:nth-child(4) { display: none; } }
@@ -229,7 +233,7 @@
           <span class="step-num">2</span>
           <h3>Le das el QR de esa rutina</h3>
           <p>Cada rutina tiene su QR. El alumno pone su documento la primera vez.</p>
-          <div class="panel"><img class="frame__img" src="assets/app/rutina-qr.webp" alt="El QR de la Rutina 1, Pecho y espalda" width="640" height="514" loading="lazy" data-source="client" data-subject="Fortius, QR de una rutina"></div>
+          <div class="panel panel--qr"><img class="frame__img" src="assets/app/rutina-qr.webp" alt="El QR de la Rutina 1, Pecho y espalda" width="640" height="514" loading="lazy" data-source="client" data-subject="Fortius, QR de una rutina"></div>
         </article>
         <article class="card card--row span-4">
           <span class="step-num">3</span>
@@ -275,7 +279,7 @@
             <label class="field">Gimnasio<input name="gimnasio" autocomplete="organization" required></label>
             <label class="field">Cantidad de alumnos<select name="alumnos" required><option value="">Elegí una opción</option><option>Hasta 100</option><option>Entre 100 y 300</option><option>Más de 300</option></select></label>
             <label class="field">WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej: 351 555-1234" required></label>
-            <div class="btn-row"><button class="btn btn--primary" type="submit">Probá 20 días gratis</button><a class="link" href="https://wa.me/5493571313949?text=Hola%2C%20quiero%20probar%20Fortius%2020%20d%C3%ADas%20en%20mi%20gimnasio" target="_blank" rel="noopener">O escribinos por WhatsApp</a></div>
+            <div class="btn-row"><button class="btn btn--primary" type="submit">Probá 20 días gratis</button><a class="link" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%92%AA%20Quiero%20arrancar%20la%20prueba%20de%2020%20d%C3%ADas%20en%20mi%20gimnasio.%20%C2%BFC%C3%B3mo%20hacemos%20para%20empezar%20a%20entrenar%20con%20la%20app%3F" target="_blank" rel="noopener">O escribinos por WhatsApp</a></div>
             <p class="t-small muted">Te escribimos por WhatsApp para activar tu prueba.</p>
           </form>
         </div>
@@ -305,7 +309,7 @@
         <div class="span-6 stack-4">
           <h2 id="preguntas-h">Preguntas frecuentes</h2>
           <p class="muted faq-intro">Lo que nos preguntan los dueños antes de empezar.</p>
-          <a class="link" href="https://wa.me/5493571313949?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Fortius" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+          <a class="link" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
         </div>
         <div class="faq span-6 start-7">
           <div class="faq__item"><h3>¿Mis alumnos tienen que instalar una app?</h3><p>No. Se abre en el navegador del celular al escanear el QR.</p></div>
@@ -339,7 +343,7 @@
         <div class="span-2 footer__col"><h4>Panel</h4><ul><li><a href="#panel">Alumnos</a></li><li><a href="#panel">Cuotas</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">$60.000 por mes</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
-        <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:pbrissio367@gmail.com?subject=Consulta%20sobre%20Fortius">pbrissio367@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Fortius" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:fortiusgymapp@gmail.com?subject=Consulta%20sobre%20Fortius">fortiusgymapp@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
       </div>
       <div class="footer__legal">
         <span>&copy; 2026 Fortius</span>

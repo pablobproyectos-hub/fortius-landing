@@ -34,4 +34,4 @@ Para que cada pedido te llegue por mail: en Netlify, **Site configuration → Fo
 ## Contacto en la página
 
 - WhatsApp (3571 31-3949) en el formulario, las preguntas frecuentes, el pie y la página de gracias, con un mensaje ya escrito.
-- El mail pbrissio367@gmail.com en el pie.
+- El mail fortiusgymapp@gmail.com en el pie.
