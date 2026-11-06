@@ -104,6 +104,14 @@
   /* splits: la bajada arranca a la altura del tope de las letras del título */
   #panel .grid--top > p, #informes .grid--top > p { margin-top: 0; padding-top: 9px; }
 
+  /* precio: los descuentos por pago adelantado, como filas dentro de la tarjeta */
+  .plan-pagos { margin: 0; padding: 0; list-style: none; }
+  .plan-pagos li { display: flex; justify-content: space-between; gap: var(--s-4); padding: var(--s-2) 0; }
+  .plan-pagos .rows__value { font-variant-numeric: tabular-nums; text-align: right; }
+
+  @media (max-width: 1279px) { #precio .plan-para { display: none; } }
+  @media (max-width: 639px) { #precio .precio-link { display: none; } }
+
   /* capítulo: la pantalla de Informes, cortada por el marco */
   #informes .frame__img { object-fit: cover; object-position: top left; }
 </style>
@@ -127,7 +135,7 @@
       <div class="nav__item"><a class="nav__link" href="#preguntas">Preguntas</a></div>
     </nav>
     <div class="nav__actions">
-      <a class="btn btn--primary" href="mailto:hola@fortius.example?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis</a>
+      <a class="btn btn--primary" href="mailto:pbrissio367@gmail.com?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis</a>
     </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú">
       <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -142,7 +150,7 @@
         <a class="pill" href="#precio"><span>20 días gratis</span><span class="muted">Después, $60.000 por mes</span></a>
         <h1 id="hero-h">Software para gimnasios y sus profes</h1>
         <p class="hero__lead">El profe arma la rutina desde su catálogo y el alumno la abre con un QR. Vos cobrás y la cuota vence sola a los 30 días.</p>
-        <div class="btn-row"><a class="btn btn--primary" href="mailto:hola@fortius.example?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
+        <div class="btn-row"><a class="btn btn--primary" href="mailto:pbrissio367@gmail.com?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
       </div>
       <div class="hero__window" data-fx="grain-gradient" data-fx-seed="11" role="img" aria-label="El panel de Estadísticas de Fortius: entrenaron hoy, cuotas vencidas y el ejercicio más usado">
         <div class="ly-piece" aria-hidden="true">
@@ -253,20 +261,22 @@
       <div class="grid grid--top">
         <div class="span-6 stack-4">
           <h2 id="precio-h">Un solo precio para tu gimnasio</h2>
-          <p class="t-lead">Probalo 20 días gratis con tus alumnos y tus profes. Después, $60.000 por mes.</p>
-          <a class="link" href="#preguntas">Ver qué pasa al terminar la prueba</a>
+          <p class="t-lead">Probalo 20 días gratis con tus alumnos y tus profes. Después, $60.000 por mes, o menos si pagás 6 o 12 meses juntos.</p>
+          <a class="link precio-link" href="#preguntas">Ver qué pasa al terminar la prueba</a>
         </div>
         <article class="card card--plan is-featured span-6 start-7">
           <h3>Fortius</h3>
-          <p class="muted">Para tu gimnasio, con todos tus profes</p>
+          <p class="muted plan-para">Para tu gimnasio, con todos tus profes</p>
           <p class="price"><span class="t-stat">$60.000</span><span class="muted">por mes</span></p>
+          <ul class="rows plan-pagos">
+            <li><span class="rows__name">Pagando 6 meses</span><span class="rows__value">$54.000 por mes, 10% menos</span></li>
+            <li><span class="rows__name">Pagando 12 meses</span><span class="rows__value">$48.000 por mes, 20% menos</span></li>
+          </ul>
           <ul class="checks">
             <li>Alumnos y cuotas, con aviso de vencimiento</li>
-            <li>Rutinas desde tu catálogo, con video</li>
-            <li>Un QR por rutina para cada alumno</li>
+            <li>Rutinas desde tu catálogo, con video y un QR por rutina</li>
             <li>Registro de pesos y progreso del alumno</li>
-            <li>Estadísticas de asistencia y cuotas</li>
-            <li>Informe mensual en PDF</li>
+            <li>Estadísticas e informe mensual en PDF</li>
             <li>Varios entrenadores en la misma cuenta</li>
           </ul>
         </article>
@@ -280,7 +290,7 @@
         <div class="span-6 stack-4">
           <h2 id="preguntas-h">Preguntas frecuentes</h2>
           <p class="muted faq-intro">Lo que nos preguntan los dueños antes de empezar.</p>
-          <a class="link" href="mailto:hola@fortius.example?subject=Consulta%20sobre%20Fortius">Escribinos tu pregunta</a>
+          <a class="link" href="https://wa.me/5493571313949?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Fortius" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
         </div>
         <div class="faq span-6 start-7">
           <div class="faq__item"><h3>¿Mis alumnos tienen que instalar una app?</h3><p>No. Se abre en el navegador del celular al escanear el QR.</p></div>
@@ -302,7 +312,7 @@
         <h2 id="close-h">Probá Fortius 20 días gratis</h2>
         <p class="t-small muted">Después, $60.000 por mes para todo tu gimnasio.</p>
       </div>
-      <a class="btn btn--primary btn--xl btn--wide" href="mailto:hola@fortius.example?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      <a class="btn btn--primary btn--xl btn--wide" href="mailto:pbrissio367@gmail.com?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
     </div>
     <div class="closing__links">
       <div class="grid">
@@ -313,8 +323,8 @@
         </div>
         <div class="span-2 footer__col"><h4>Panel</h4><ul><li><a href="#panel">Alumnos</a></li><li><a href="#panel">Cuotas</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li></ul></div>
-        <div class="span-2 footer__col"><h4>Informes</h4><ul><li><a href="#informes">Estadísticas</a></li><li><a href="#informes">Informe mensual</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">$60.000 por mes</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:pbrissio367@gmail.com?subject=Consulta%20sobre%20Fortius">pbrissio367@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Fortius" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
       </div>
       <div class="footer__legal">
         <span>&copy; 2026 Fortius</span>

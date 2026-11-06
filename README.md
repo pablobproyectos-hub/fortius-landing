@@ -25,6 +25,7 @@ Cada `git push` a `main` vuelve a publicar el sitio.
 - `assets/app/`: capturas reales de la app de Fortius (con datos de demostración) y el logo.
 - El resto de `assets/`: el sistema de estilos y animaciones de la skill design-taste-frontend (solo los archivos que la página usa).
 
-## Pendiente
+## Contacto en la página
 
-- El botón "Pedí una demo" abre un mail a `hola@fortius.example`: reemplazarlo por el contacto real (aparece en `index.html` tres veces).
+- "Probá 20 días gratis" abre un mail a pbrissio367@gmail.com.
+- Las preguntas y el pie llevan también a WhatsApp (3571 31-3949).
