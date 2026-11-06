@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es" data-type="software" data-radius="soft" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recibimos tu pedido: Fortius</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/app/fortius.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<style>
+:root {
+  --p-bg: #f4f1ec; --p-surface: #e9e4dc; --p-ink: #1c1714; --p-muted: #463f39;
+  --p-accent: #e8590c; --p-accent-ink: #111111; --p-action: #e8590c; --p-action-ink: #111111;
+  --p-inv-bg: #1c1714; --p-inv-surface: #282320; --p-inv-ink: #f4f1ec; --p-inv-muted: #c4bfb9;
+  --p-inv-accent: #e8590c; --p-inv-accent-ink: #111111; --p-inv-action: #e8590c; --p-inv-action-ink: #111111;
+  --font-display: "Mona Sans", system-ui, sans-serif;
+  --font-text: "Mona Sans", system-ui, sans-serif;
+  --display-weight: 500;
+  --display-tracking: -0.03em;
+  --display-stretch: 104%;
+}
+.gracias { min-height: 100svh; display: grid; align-content: center; padding-block: var(--s-8); }
+.gracias__marca { display: inline-flex; align-items: center; gap: 10px; font: var(--display-weight) 22px/1 var(--font-display); color: var(--ink); text-decoration: none; margin-bottom: var(--s-7); }
+.gracias__marca svg { width: 32px; height: 32px; }
+.gracias h1 { font: var(--display-weight) clamp(38px, 4vw + 20px, 64px)/1.05 var(--font-display); letter-spacing: var(--display-tracking); font-stretch: var(--display-stretch); margin: 0 0 var(--s-5); max-width: 16ch; }
+.gracias p { font-size: 20px; line-height: 1.5; max-width: 44ch; margin: 0 0 var(--s-6); }
+</style>
+</head>
+<body>
+<main class="gracias">
+  <div class="wrap">
+    <a class="gracias__marca" href="index.html" aria-label="Fortius, volver al inicio">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="gr-f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A24"/><stop offset="1" stop-color="#FF4E00"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="#16110E"/><g transform="translate(256 256) skewX(-6) translate(-256 -256) translate(0 -8) translate(256 256) scale(1.18) translate(-256 -256)"><path d="M148 400 L148 112 L384 112 L350 178 L222 178 L222 234 L330 234 L302 292 L222 292 L222 400 Z" fill="url(#gr-f)"/></g></svg>Fortius</a>
+    <h1>Recibimos tu pedido de prueba</h1>
+    <p>Te escribimos por WhatsApp para activar tus 20 días gratis en tu gimnasio.</p>
+    <div class="btn-row">
+      <a class="btn btn--secondary" href="index.html">Volver a la página</a>
+      <a class="link" href="https://wa.me/5493571313949?text=Hola%2C%20acabo%20de%20pedir%20la%20prueba%20de%20Fortius" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+    </div>
+  </div>
+</main>
+<script type="module" src="assets/motion/motion.js"></script>
+</body>
+</html>

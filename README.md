@@ -25,7 +25,13 @@ Cada `git push` a `main` vuelve a publicar el sitio.
 - `assets/app/`: capturas reales de la app de Fortius (con datos de demostración) y el logo.
 - El resto de `assets/`: el sistema de estilos y animaciones de la skill design-taste-frontend (solo los archivos que la página usa).
 
+## Pedidos de prueba (Netlify Forms)
+
+"Probá 20 días gratis" lleva al formulario de la sección Precio (`#prueba`): nombre, gimnasio, cantidad de alumnos y WhatsApp. Netlify lo detecta solo al publicar (`data-netlify="true"`) y, al enviarlo, el visitante ve `gracias.html`.
+
+Para que cada pedido te llegue por mail: en Netlify, **Site configuration → Forms → Form notifications → Add notification → Email notification**, formulario `prueba`, tu mail. El asunto es "Nuevo pedido de prueba de Fortius". Todos los pedidos quedan además en la pestaña **Forms** del sitio.
+
 ## Contacto en la página
 
-- "Probá 20 días gratis" abre un mail a pbrissio367@gmail.com.
-- Las preguntas y el pie llevan también a WhatsApp (3571 31-3949).
+- WhatsApp (3571 31-3949) en el formulario, las preguntas frecuentes, el pie y la página de gracias, con un mensaje ya escrito.
+- El mail pbrissio367@gmail.com en el pie.

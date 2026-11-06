@@ -110,7 +110,10 @@
   .plan-pagos .rows__value { font-variant-numeric: tabular-nums; text-align: right; }
 
   @media (max-width: 1279px) { #precio .plan-para { display: none; } }
-  @media (max-width: 639px) { #precio .precio-link { display: none; } }
+  /* precio + formulario: apilados no entran en una pantalla, van en dos */
+  #precio { --hm: 2; }
+  /* en tablet entra en una pantalla sin la lista de lo que incluye (ya está mostrado en las secciones de arriba) */
+  @media (min-width: 640px) and (max-width: 1023px) { #precio .checks { display: none; } }
 
   /* capítulo: la pantalla de Informes, cortada por el marco */
   #informes .frame__img { object-fit: cover; object-position: top left; }
@@ -135,7 +138,7 @@
       <div class="nav__item"><a class="nav__link" href="#preguntas">Preguntas</a></div>
     </nav>
     <div class="nav__actions">
-      <a class="btn btn--primary" href="mailto:pbrissio367@gmail.com?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis</a>
+      <a class="btn btn--primary" href="#prueba">Probá 20 días gratis</a>
     </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú">
       <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -150,7 +153,7 @@
         <a class="pill" href="#precio"><span>20 días gratis</span><span class="muted">Después, $60.000 por mes</span></a>
         <h1 id="hero-h">Software para gimnasios y sus profes</h1>
         <p class="hero__lead">El profe arma la rutina desde su catálogo y el alumno la abre con un QR. Vos cobrás y la cuota vence sola a los 30 días.</p>
-        <div class="btn-row"><a class="btn btn--primary" href="mailto:pbrissio367@gmail.com?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
+        <div class="btn-row"><a class="btn btn--primary" href="#prueba">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
       </div>
       <div class="hero__window" data-fx="grain-gradient" data-fx-seed="11" role="img" aria-label="El panel de Estadísticas de Fortius: entrenaron hoy, cuotas vencidas y el ejercicio más usado">
         <div class="ly-piece" aria-hidden="true">
@@ -260,9 +263,21 @@
     <div class="wrap">
       <div class="grid grid--top">
         <div class="span-6 stack-4">
-          <h2 id="precio-h">Un solo precio para tu gimnasio</h2>
-          <p class="t-lead">Probalo 20 días gratis con tus alumnos y tus profes. Después, $60.000 por mes, o menos si pagás 6 o 12 meses juntos.</p>
-          <a class="link precio-link" href="#preguntas">Ver qué pasa al terminar la prueba</a>
+          <h2 id="precio-h">Precio y prueba de 20 días</h2>
+          <p class="t-lead">Probalo 20 días gratis. Después, $60.000 por mes, o menos si pagás 6 o 12 meses juntos.</p>
+          <!-- Netlify Forms: Netlify detecta este formulario al publicar (data-netlify) y manda cada pedido por mail.
+               El campo "subject" fija el asunto del mail; "bot-field" es la trampa para bots (netlify-honeypot). -->
+          <form class="form" id="prueba" name="prueba" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="prueba">
+            <input type="hidden" name="subject" value="Nuevo pedido de prueba de Fortius">
+            <p hidden><label>No completar este campo <input name="bot-field"></label></p>
+            <label class="field">Tu nombre<input name="nombre" autocomplete="name" required></label>
+            <label class="field">Gimnasio<input name="gimnasio" autocomplete="organization" required></label>
+            <label class="field">Cantidad de alumnos<select name="alumnos" required><option value="">Elegí una opción</option><option>Hasta 100</option><option>Entre 100 y 300</option><option>Más de 300</option></select></label>
+            <label class="field">WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej: 351 555-1234" required></label>
+            <div class="btn-row"><button class="btn btn--primary" type="submit">Probá 20 días gratis</button><a class="link" href="https://wa.me/5493571313949?text=Hola%2C%20quiero%20probar%20Fortius%2020%20d%C3%ADas%20en%20mi%20gimnasio" target="_blank" rel="noopener">O escribinos por WhatsApp</a></div>
+            <p class="t-small muted">Te escribimos por WhatsApp para activar tu prueba.</p>
+          </form>
         </div>
         <article class="card card--plan is-featured span-6 start-7">
           <h3>Fortius</h3>
@@ -312,7 +327,7 @@
         <h2 id="close-h">Probá Fortius 20 días gratis</h2>
         <p class="t-small muted">Después, $60.000 por mes para todo tu gimnasio.</p>
       </div>
-      <a class="btn btn--primary btn--xl btn--wide" href="mailto:pbrissio367@gmail.com?subject=Prueba%20de%2020%20d%C3%ADas%20de%20Fortius">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      <a class="btn btn--primary btn--xl btn--wide" href="#prueba">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
     </div>
     <div class="closing__links">
       <div class="grid">
