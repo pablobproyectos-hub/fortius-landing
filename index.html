@@ -119,6 +119,15 @@
   /* en tablet entra en una pantalla sin la lista de lo que incluye (ya está mostrado en las secciones de arriba) */
   @media (min-width: 640px) and (max-width: 1023px) { #precio .checks { display: none; } }
 
+  /* videos: los dos promocionales, 16:9, con su portada; se descargan solo al tocar play */
+  .video-marco { margin-top: var(--s-5); border-radius: var(--r-lg); overflow: hidden; background: #121212; aspect-ratio: 16 / 9; box-shadow: 0 24px 50px -28px rgb(28 23 20 / .5); }
+  .video-marco video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #videos .grid > .card { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: var(--s-6); align-content: start; }
+    #videos .grid > .card > :not(.video-marco) { grid-column: 1; }
+    #videos .grid > .card > .video-marco { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
+  }
+
   /* capítulo: la pantalla de Informes, cortada por el marco */
   #informes .frame__img { object-fit: cover; object-position: top left; }
 </style>
@@ -213,6 +222,34 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="videos" aria-labelledby="videos-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="videos-h">Fortius en dos videos</h2>
+      </div>
+      <div class="grid">
+        <article class="card card--open span-6">
+          <h3>Una semana del dueño con Fortius</h3>
+          <p>Cobrás cuotas, armás rutinas y ves quién vino, en 36 segundos.</p>
+          <div class="video-marco">
+            <video controls preload="none" playsinline poster="assets/video/lunes-8-portada.webp" width="1920" height="1080" aria-label="Video: una semana del dueño de un gimnasio con Fortius">
+              <source src="assets/video/fortius-lunes-8.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+        <article class="card card--open span-6">
+          <h3>Lo que ve el alumno</h3>
+          <p>De la hoja de papel al QR y al progreso en el celular, en 30 segundos.</p>
+          <div class="video-marco">
+            <video controls preload="none" playsinline poster="assets/video/papelito-portada.webp" width="1920" height="1080" aria-label="Video: el alumno pasa de la rutina en papel a Fortius en el celular">
+              <source src="assets/video/fortius-el-papelito.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
       </div>
     </div>
   </section>
