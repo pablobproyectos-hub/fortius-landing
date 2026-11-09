@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fortius: software para gimnasios y sus profes</title>
-<meta name="description" content="Fortius es el software para gimnasios: rutinas con un QR por rutina, cuotas, estadísticas e informe mensual en PDF. 20 días gratis, después $75.000 por mes.">
+<meta name="description" content="Fortius es el software para gimnasios: rutinas con un QR por rutina, cuotas, estadísticas e informe mensual en PDF. 20 días gratis, después lo mismo que 2 a 5 cuotas de tu gimnasio por mes.">
 <meta name="site-kind" content="software">
 <meta name="page-type" content="software">
 <link rel="icon" type="image/svg+xml" href="assets/app/fortius.svg">
@@ -163,7 +163,7 @@
   <section class="hero hero--centred" aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text">
       <div class="hero__c">
-        <a class="pill" href="#precio"><span>20 días gratis</span><span class="muted">Después, $75.000 por mes</span></a>
+        <a class="pill" href="#precio"><span>20 días gratis</span><span class="muted">Después, lo que pagan 2 a 5 alumnos</span></a>
         <h1 id="hero-h">Software para gimnasios y sus profes</h1>
         <p class="hero__lead">El profe arma la rutina desde su catálogo y el alumno la abre con un QR. Vos cobrás y la cuota vence sola a los 30 días.</p>
         <div class="btn-row"><a class="btn btn--primary" href="#prueba">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
@@ -305,7 +305,7 @@
       <div class="grid grid--top">
         <div class="span-6 stack-4">
           <h2 id="precio-h">Precio y prueba de 20 días</h2>
-          <p class="t-lead">Probalo 20 días gratis. Después, $75.000 por mes, o menos si pagás 6 o 12 meses juntos.</p>
+          <p class="t-lead">Probalo 20 días gratis. Después, Fortius te cuesta lo mismo que 2 a 5 cuotas de tu gimnasio, según cuántos alumnos tengas.</p>
           <!-- Netlify Forms: Netlify detecta este formulario al publicar (data-netlify) y manda cada pedido por mail.
                El campo "subject" fija el asunto del mail; "bot-field" es la trampa para bots (netlify-honeypot). -->
           <form class="form" id="prueba" name="prueba" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
@@ -314,7 +314,7 @@
             <p hidden><label>No completar este campo <input name="bot-field"></label></p>
             <label class="field">Tu nombre<input name="nombre" autocomplete="name" required></label>
             <label class="field">Gimnasio<input name="gimnasio" autocomplete="organization" required></label>
-            <label class="field">Cantidad de alumnos<select name="alumnos" required><option value="">Elegí una opción</option><option>Hasta 100</option><option>Entre 100 y 300</option><option>Más de 300</option></select></label>
+            <label class="field">Cantidad de alumnos<select name="alumnos" required><option value="">Elegí una opción</option><option>Hasta 40</option><option>Entre 41 y 80</option><option>Entre 81 y 150</option><option>Más de 150</option></select></label>
             <label class="field">WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej: 351 555-1234" required></label>
             <div class="btn-row"><button class="btn btn--primary" type="submit">Probá 20 días gratis</button><a class="link" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%92%AA%20Quiero%20arrancar%20la%20prueba%20de%2020%20d%C3%ADas%20en%20mi%20gimnasio.%20%C2%BFC%C3%B3mo%20hacemos%20para%20empezar%20a%20entrenar%20con%20la%20app%3F" target="_blank" rel="noopener">O escribinos por WhatsApp</a></div>
             <p class="t-small muted">Te escribimos por WhatsApp para activar tu prueba.</p>
@@ -323,12 +323,14 @@
         <article class="card card--plan is-featured span-6 start-7">
           <h3>Fortius</h3>
           <p class="muted plan-para">Para tu gimnasio, con todos tus profes</p>
-          <p class="price"><span class="t-stat">$75.000</span><span class="muted">por mes</span></p>
+          <p class="price"><span class="t-stat">2 a 5 cuotas</span><span class="muted">por mes</span></p>
           <ul class="rows plan-pagos">
-            <li><span class="rows__name">Pagando 6 meses</span><span class="rows__value">$67.500 por mes, 10% menos</span></li>
-            <li><span class="rows__name">Pagando 12 meses</span><span class="rows__value">$60.000 por mes, 20% menos</span></li>
+            <li><span class="rows__name">Hasta 40 alumnos</span><span class="rows__value">2 cuotas</span></li>
+            <li><span class="rows__name">De 41 a 80 alumnos</span><span class="rows__value">3 cuotas</span></li>
+            <li><span class="rows__name">De 81 a 150 alumnos</span><span class="rows__value">4 cuotas</span></li>
+            <li><span class="rows__name">Más de 150 alumnos</span><span class="rows__value">5 cuotas</span></li>
           </ul>
-          <p class="t-small muted">Desde enero de 2027, el precio se actualiza cada 4 meses.</p>
+          <p class="t-small muted">Tomamos la cuota de tu segundo plan más caro, con un mínimo de $40.000 por mes. Si subís tu cuota, el precio acompaña: no hay otros aumentos. Pagando 6 meses, 10% menos; 12 meses, 20% menos.</p>
           <ul class="checks">
             <li>Alumnos y cuotas, con aviso de vencimiento</li>
             <li>Rutinas desde tu catálogo, con video y un QR por rutina</li>
@@ -354,7 +356,7 @@
           <div class="faq__item"><h3>¿Cómo entra el alumno la primera vez?</h3><p>Pone su documento una vez y entra directo durante 30 días.</p></div>
           <div class="faq__item"><h3>¿Cómo sé quién debe la cuota?</h3><p>Vence 30 días después del último pago y aparece en Cuotas vencidas.</p></div>
           <div class="faq__item"><h3>¿Puedo cargar mis propios ejercicios?</h3><p>Sí. El catálogo es de tu gimnasio, con categorías y video.</p></div>
-          <div class="faq__item"><h3>¿Qué pasa cuando terminan los 20 días?</h3><p>Si te sirve, seguís por $75.000 por mes. Si no, no pagás nada.</p></div>
+          <div class="faq__item"><h3>¿Qué pasa cuando terminan los 20 días?</h3><p>Si te sirve, pagás lo mismo que 2 a 5 cuotas de tu gimnasio por mes. Si no, no pagás nada.</p></div>
           <div class="faq__item"><h3>¿Puede haber varios entrenadores?</h3><p>Sí. Cada profe entra con su cuenta y ve los mismos alumnos.</p></div>
         </div>
       </div>
@@ -367,7 +369,7 @@
     <div class="closing__cta close--type">
       <div class="section-head">
         <h2 id="close-h">Probá Fortius 20 días gratis</h2>
-        <p class="t-small muted">Después, $75.000 por mes para todo tu gimnasio.</p>
+        <p class="t-small muted">Después, lo mismo que 2 a 5 cuotas por mes para todo tu gimnasio.</p>
       </div>
       <a class="btn btn--primary btn--xl btn--wide" href="#prueba">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
     </div>
@@ -380,7 +382,7 @@
         </div>
         <div class="span-2 footer__col"><h4>Panel</h4><ul><li><a href="#panel">Alumnos</a></li><li><a href="#panel">Cuotas</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li></ul></div>
-        <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">$75.000 por mes</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">2 a 5 cuotas por mes</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:fortiusgymapp@gmail.com?subject=Consulta%20sobre%20Fortius">fortiusgymapp@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
       </div>
       <div class="footer__legal">
