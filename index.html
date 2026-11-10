@@ -90,12 +90,19 @@
   }
 
   /* pasos: capturas reales de la app en el panel de cada tarjeta */
-  #rutinas .panel { --p-h: 336px; background: #121212; }
-  @media (min-width: 640px) and (max-width: 1023px) { #rutinas { --h: 2; } }
-  @media (min-width: 1024px) { #rutinas .grid > .card { grid-column: auto / span 4; } }
-  @media (min-width: 1024px) and (max-width: 1279px) { #rutinas .panel { --p-h: 250px; } }
-  @media (max-width: 639px) { #rutinas .panel { --p-h: 260px; } }
-  #rutinas .panel .frame__img { object-fit: cover; object-position: left top; }
+  #rutinas .panel, #alumno .panel { --p-h: 336px; background: #121212; }
+  @media (min-width: 640px) and (max-width: 1023px) { #rutinas, #alumno { --h: 2; } }
+  @media (min-width: 1024px) { #rutinas .grid > .card, #alumno .grid > .card { grid-column: auto / span 4; } }
+  @media (min-width: 1024px) and (max-width: 1279px) { #rutinas .panel, #alumno .panel { --p-h: 250px; } }
+  @media (max-width: 639px) { #rutinas .panel, #alumno .panel { --p-h: 260px; } }
+  #rutinas .panel .frame__img, #alumno .panel .frame__img { object-fit: cover; object-position: left top; }
+  /* alumno: capturas verticales del celular; en escritorio se ve más alto, en tablet va a lo ancho de un celular y centrado */
+  @media (min-width: 1280px) { #alumno .panel { --p-h: 440px; } }
+  @media (min-width: 1024px) and (max-width: 1279px) { #alumno .panel { --p-h: 230px; } }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #alumno .panel { --p-h: 400px; }
+    #alumno .panel .frame__img { width: 292px; margin-inline: auto; }
+  }
   /* el QR entero, centrado sobre el mismo fondo del modal de la app (antes el recorte lo cortaba a la derecha) */
   #rutinas .panel--qr { background: #1b1b1b; }
   #rutinas .panel--qr .frame__img { object-fit: contain; object-position: center; }
@@ -137,7 +144,7 @@
      deal: hero centred, nav nav-centre (nav-cards redealt: no photographs), close close-type, footer footer-columns,
            rhythm dark-band (the chapter), buttons solid, mark: the client's own logo (the F from the app), ground sage,
            effect grain-gradient in the hero window, moments none
-     screens: hero 1 · panel (app-frame) 1 · rutinas (steps) 1 · informes (chapter, dark band) 1 · preguntas (faq) 1 · footer.closing 1 -->
+     screens: hero 1 · panel (app-frame) 1 · rutinas (steps) 1 · alumno (steps, capturas del celular) 1 · informes (chapter, dark band) 1 · preguntas (faq) 1 · footer.closing 1 -->
 
 <header class="nav nav--centre">
   <div class="wrap nav__bar">
@@ -146,6 +153,7 @@
     <nav class="nav__links" aria-label="Principal">
       <div class="nav__item"><a class="nav__link" href="#panel">Panel</a></div>
       <div class="nav__item"><a class="nav__link" href="#rutinas">Rutinas</a></div>
+      <div class="nav__item"><a class="nav__link" href="#alumno">Alumno</a></div>
       <div class="nav__item"><a class="nav__link" href="#informes">Informes</a></div>
       <div class="nav__item"><a class="nav__link" href="#precio">Precio</a></div>
       <div class="nav__item"><a class="nav__link" href="#preguntas">Preguntas</a></div>
@@ -282,6 +290,32 @@
     </div>
   </section>
 
+  <section class="section" id="alumno" style="--hm: 2" aria-labelledby="alumno-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="alumno-h">Lo que ve tu alumno en su celular</h2>
+        <p class="span-6 start-7 muted">Entra con el QR y su documento, sin instalar nada. Desde ahí ve sus rutinas, su progreso y sus pagos.</p>
+      </div>
+      <div class="grid" style="margin-top: var(--s-7)">
+        <article class="card card--row span-4">
+          <h3>Sus rutinas del día</h3>
+          <p>Elige la rutina de hoy y ve cuándo vence su cuota.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/alumno-rutinas.webp" alt="Mis rutinas en el celular de Diego: Empuje, Tracción y Piernas, con 6 días para el vencimiento de su cuota" width="640" height="876" loading="lazy" data-source="client" data-subject="Fortius, rutinas del alumno"></div>
+        </article>
+        <article class="card card--row span-4">
+          <h3>Su progreso</h3>
+          <p>Anota su peso, ve la curva y baja su informe en PDF.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/alumno-progreso.webp" alt="Mi progreso de Diego: 86,9 kg, 10,8 kg más que en mayo, con el gráfico de su peso" width="640" height="876" loading="lazy" data-source="client" data-subject="Fortius, progreso del alumno"></div>
+        </article>
+        <article class="card card--row span-4">
+          <h3>Sus pagos</h3>
+          <p>Cada cuota pagada, con la fecha, el plan y el monto.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/alumno-pagos.webp" alt="Mis pagos de Diego: las cuotas de octubre, septiembre y agosto con su monto" width="640" height="876" loading="lazy" data-source="client" data-subject="Fortius, pagos del alumno"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section ground-inverse" id="informes" aria-labelledby="informes-h">
     <div class="wrap">
       <div class="grid grid--top">
@@ -381,7 +415,7 @@
           <p class="footer__lede">Rutinas, cuotas y asistencia de tu gimnasio.</p>
         </div>
         <div class="span-2 footer__col"><h4>Panel</h4><ul><li><a href="#panel">Alumnos</a></li><li><a href="#panel">Cuotas</a></li></ul></div>
-        <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li><li><a href="#alumno">App del alumno</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">2 a 5 cuotas por mes</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:fortiusgymapp@gmail.com?subject=Consulta%20sobre%20Fortius">fortiusgymapp@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
       </div>
