@@ -90,25 +90,23 @@
   }
 
   /* pasos: capturas reales de la app en el panel de cada tarjeta */
-  #rutinas .panel, #alumno .panel { --p-h: 336px; background: #121212; }
-  @media (min-width: 640px) and (max-width: 1023px) { #rutinas, #alumno { --h: 2; } }
+  #rutinas .panel { --p-h: 336px; background: #121212; }
+  @media (min-width: 640px) and (max-width: 1023px) { #rutinas { --h: 2; } }
   @media (min-width: 1024px) { #rutinas .grid > .card, #alumno .grid > .card { grid-column: auto / span 4; } }
-  @media (min-width: 1024px) and (max-width: 1279px) { #rutinas .panel, #alumno .panel { --p-h: 250px; } }
-  @media (max-width: 639px) { #rutinas .panel, #alumno .panel { --p-h: 260px; } }
-  #rutinas .panel .frame__img, #alumno .panel .frame__img { object-fit: cover; object-position: left top; }
-  /* alumno: capturas verticales del celular, siempre en su proporción y pegadas arriba: el panel las corta
-     solo abajo (nunca a los costados); en tablet van a lo ancho de un celular y centradas */
-  #alumno .panel .frame__img { height: auto; bottom: auto; }
-  /* desde 1280 la sección mide justo una pantalla: las tarjetas ocupan lo que queda bajo el título y la
-     captura se achica con el alto de la pantalla (en una pantalla baja no se mete bajo la sección siguiente) */
-  @media (min-width: 1280px) {
-    #alumno .wrap > .grid:last-child { flex: 1 1 0; min-height: 0; }
-    #alumno .panel { --p-h: 140px; flex: 1 1 0; }
-  }
-  @media (min-width: 1024px) and (max-width: 1279px) { #alumno .panel { --p-h: 230px; } }
+  @media (min-width: 1024px) and (max-width: 1279px) { #rutinas .panel { --p-h: 250px; } }
+  @media (max-width: 639px) { #rutinas .panel { --p-h: 260px; } }
+  #rutinas .panel .frame__img { object-fit: cover; object-position: left top; }
+
+  /* alumno: cada captura es la pantalla entera del celular, sin recortes. Por eso esta sección no mide una
+     pantalla justa: crece lo que haga falta y empuja la siguiente más abajo. */
+  main > section#alumno { height: auto; min-height: 100vh; min-height: 100svh; }
+  main > section#alumno > .wrap { height: auto; }
+  #alumno .card > .panel { --p-h: 0px; min-height: 0; flex: none; margin-bottom: 0; border-radius: 12px; background: #121212; }
+  #alumno .panel .frame__img { position: static; display: block; width: 100%; height: auto; }
+  #alumno .panel::before, #alumno .panel::after { display: none; }   /* sin el brillo del panel encima de la captura */
+  /* en tablet, una tarjeta por fila: la captura al ancho de un celular, centrada */
   @media (min-width: 640px) and (max-width: 1023px) {
-    #alumno .panel { --p-h: 400px; }
-    #alumno .panel .frame__img { width: 292px; margin-inline: auto; }
+    #alumno .card > .panel { width: 320px; max-width: 100%; margin-inline: auto; }
   }
   /* el QR entero, centrado sobre el mismo fondo del modal de la app (antes el recorte lo cortaba a la derecha) */
   #rutinas .panel--qr { background: #1b1b1b; }
@@ -297,7 +295,7 @@
     </div>
   </section>
 
-  <section class="section" id="alumno" style="--hm: 2" aria-labelledby="alumno-h">
+  <section class="section" id="alumno" aria-labelledby="alumno-h">
     <div class="wrap">
       <div class="grid grid--top">
         <h2 class="span-5" id="alumno-h">Lo que ve tu alumno en su celular</h2>
@@ -307,17 +305,17 @@
         <article class="card card--row span-4">
           <h3>Sus rutinas del día</h3>
           <p>Elige la rutina de hoy y ve cuándo vence su cuota.</p>
-          <div class="panel"><img class="frame__img" src="assets/app/alumno-rutinas.webp" alt="Mis rutinas en el celular de Diego: Empuje, Tracción y Piernas, con 6 días para el vencimiento de su cuota" width="640" height="1237" loading="lazy" data-source="client" data-subject="Fortius, rutinas del alumno"></div>
+          <div class="panel"><img class="frame__img" src="assets/app/alumno-rutinas.webp" alt="Mis rutinas en el celular de Diego: Empuje, Tracción y Piernas, con 6 días para el vencimiento de su cuota" width="640" height="1359" loading="lazy" data-source="client" data-subject="Fortius, rutinas del alumno"></div>
         </article>
         <article class="card card--row span-4">
           <h3>Su progreso</h3>
           <p>Anota su peso, ve la curva y baja su informe en PDF.</p>
-          <div class="panel"><img class="frame__img" src="assets/app/alumno-progreso.webp" alt="Mi progreso de Diego: 86,9 kg, 10,8 kg más que en mayo, con el gráfico de su peso" width="640" height="1237" loading="lazy" data-source="client" data-subject="Fortius, progreso del alumno"></div>
+          <div class="panel"><img class="frame__img" src="assets/app/alumno-progreso.webp" alt="Mi progreso de Diego: 86,9 kg, 10,8 kg más que en mayo, con el gráfico de su peso" width="640" height="1359" loading="lazy" data-source="client" data-subject="Fortius, progreso del alumno"></div>
         </article>
         <article class="card card--row span-4">
           <h3>Sus pagos</h3>
           <p>Cada cuota pagada, con la fecha, el plan y el monto.</p>
-          <div class="panel"><img class="frame__img" src="assets/app/alumno-pagos.webp" alt="Mis pagos de Diego: las cuotas de octubre, septiembre y agosto con su monto" width="640" height="1237" loading="lazy" data-source="client" data-subject="Fortius, pagos del alumno"></div>
+          <div class="panel"><img class="frame__img" src="assets/app/alumno-pagos.webp" alt="Mis pagos de Diego: las cuotas de octubre, septiembre y agosto con su monto" width="640" height="1359" loading="lazy" data-source="client" data-subject="Fortius, pagos del alumno"></div>
         </article>
       </div>
     </div>
