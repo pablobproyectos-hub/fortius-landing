@@ -23,7 +23,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..600&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Mona+Sans:wdth,wght@75..125,400..600&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/system.css">
 <link rel="stylesheet" href="assets/ui/cards.css">
 <link rel="stylesheet" href="assets/motion/motion.css">
@@ -36,14 +36,17 @@
   --p-accent: #e8590c; --p-accent-ink: #111111; --p-action: #e8590c; --p-action-ink: #111111;
   --p-inv-bg: #1c1714; --p-inv-surface: #282320; --p-inv-ink: #f4f1ec; --p-inv-muted: #c4bfb9;
   --p-inv-accent: #e8590c; --p-inv-accent-ink: #111111; --p-inv-action: #e8590c; --p-inv-action-ink: #111111;
-  --font-display: "Mona Sans", system-ui, sans-serif;
+  /* Títulos, números y marca con Barlow Condensed, la tipografía de la app (alta, condensada, se lee
+     de un vistazo): la landing habla con la misma voz que lo que el gimnasio va a usar. El texto de
+     lectura sigue en Mona Sans. Una condensada pide más tamaño y casi nada de tracking negativo. */
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
   --font-text: "Mona Sans", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --display-weight: 500;
-  --display-tracking: -0.03em;
-  --display-tracking-xl: -0.04em;
-  --display-stretch: 104%;
-  --ly-scale: 0.96;
+  --display-weight: 700;
+  --display-tracking: -0.005em;
+  --display-tracking-xl: -0.01em;
+  --display-stretch: 100%;
+  --ly-scale: 1.12;
 }
 </style>
 <script src="assets/backgrounds/backgrounds.js"></script>
@@ -159,6 +162,40 @@
     #videos .grid > .card { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: var(--s-6); align-content: start; }
     #videos .grid > .card > :not(.video-marco) { grid-column: 1; }
     #videos .grid > .card > .video-marco { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
+  }
+
+  /* títulos de sección con la condensada: un escalón más grandes (a igual tamaño se ven más chicos
+     que una grotesca ancha) */
+  h2, .t-h2 { font-size: calc(var(--t-h2) * 1.18); line-height: 1.02; }
+  .step-num { font-family: var(--font-display); font-weight: 700; }
+
+  /* franjas oscuras (el mundo de la app: fondo casi negro, naranja): Videos y "Lo que ve tu alumno",
+     alternadas con las claras. Las capturas oscuras del celular dejan de ser rectángulos negros sobre
+     beige y pasan a fundirse con el fondo. */
+  #videos .card, #alumno .card { background: var(--p-inv-surface); border-color: rgb(255 255 255 / .08); }
+  #videos .card p, #alumno .card p { color: var(--p-inv-muted); }
+  #alumno .card > .panel { box-shadow: 0 0 0 1px rgb(255 255 255 / .06); }
+  .video-marco { box-shadow: 0 0 0 1px rgb(255 255 255 / .06), 0 24px 50px -28px rgb(0 0 0 / .6); }
+
+  /* precio protagonista: el rango de cuotas grande, con la condensada, y un ejemplo con números */
+  #precio .price .t-stat { font-size: clamp(56px, 3vw + 40px, 80px); line-height: .9; letter-spacing: 0; }
+  #precio .price { align-items: baseline; flex-wrap: wrap; gap: var(--s-2) var(--s-3); }
+  .plan-ejemplo { display: grid; gap: var(--s-2); padding: var(--s-4); border-radius: var(--r-md); background: var(--p-bg); }
+  .plan-ejemplo p { margin: 0; font-size: var(--t-small); line-height: 1.45; }
+  .plan-ejemplo .plan-ejemplo__titulo { font-weight: 600; }
+  .plan-ejemplo .nowrap { white-space: nowrap; }
+  .plan-ejemplo strong { font-family: var(--font-display); font-weight: 700; font-size: 1.25em; letter-spacing: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* escritorio grande (1280px o más): cada sección mide AL MENOS una pantalla (o las que pida --h) y
+     crece si su contenido no entra, igual que el sistema hace entre 640 y 1279px. Con los títulos
+     condensados más grandes y el ejemplo del precio, Precio y Preguntas pasaban de una pantalla y se
+     montaban sobre la sección siguiente. */
+  @media (min-width: 1280px) {
+    main > section.section:not(.hero), footer.closing {
+      height: auto; min-height: calc(var(--h, 1) * 100vh); min-height: calc(var(--h, 1) * 100svh);
+      display: flex; flex-direction: column;
+    }
+    main > section.section:not(.hero) > .wrap, footer.closing > .wrap { flex: 1 0 auto; height: auto; min-height: 0; }
   }
 
   /* capítulo: la pantalla de Informes, cortada por el marco */
@@ -281,7 +318,7 @@
     </div>
   </section>
 
-  <section class="section" id="videos" aria-labelledby="videos-h">
+  <section class="section ground-inverse" id="videos" aria-labelledby="videos-h">
     <div class="wrap">
       <div class="section-head">
         <h2 id="videos-h">Fortius en dos videos</h2>
@@ -337,7 +374,7 @@
     </div>
   </section>
 
-  <section class="section" id="alumno" aria-labelledby="alumno-h">
+  <section class="section ground-inverse" id="alumno" aria-labelledby="alumno-h">
     <div class="wrap">
       <div class="grid grid--top">
         <h2 class="span-5" id="alumno-h">Lo que ve tu alumno en su celular</h2>
@@ -363,7 +400,7 @@
     </div>
   </section>
 
-  <section class="section ground-inverse" id="informes" aria-labelledby="informes-h">
+  <section class="section" id="informes" aria-labelledby="informes-h">
     <div class="wrap">
       <div class="grid grid--top">
         <h2 class="span-5" id="informes-h">Estadísticas e informe del mes</h2>
@@ -411,7 +448,13 @@
             <li><span class="rows__name">De 81 a 150 alumnos</span><span class="rows__value">4 cuotas</span></li>
             <li><span class="rows__name">Más de 150 alumnos</span><span class="rows__value">5 cuotas</span></li>
           </ul>
-          <p class="t-small muted">Tomamos la cuota de tu segundo plan más caro, con un mínimo de $40.000 por mes. Si subís tu cuota, el precio acompaña: no hay otros aumentos. Pagando 6 meses, 10% menos; 12 meses, 20% menos.</p>
+          <p class="t-small muted">Cada cuota vale lo que tu segundo plan más caro, con un mínimo de $40.000 por cuota. Si subís tu cuota, el precio acompaña: no hay otros aumentos. Pagando 6 meses, 10% menos; 12 meses, 20% menos.</p>
+          <!-- Ejemplos con la regla de backend/src/config/precioFortius.js (mínimo POR cuota). -->
+          <div class="plan-ejemplo">
+            <p class="plan-ejemplo__titulo">Por ejemplo</p>
+            <p>60 alumnos, cuota de $45.000: <span class="nowrap">3 × $45.000 = <strong>$135.000</strong> por mes.</span></p>
+            <p>30 alumnos, cuota de $25.000: <span class="nowrap">2 × $40.000 = <strong>$80.000</strong> por mes.</span></p>
+          </div>
           <ul class="checks">
             <li>Alumnos y cuotas, con aviso de vencimiento</li>
             <li>Rutinas desde tu catálogo, con video y un QR por rutina</li>
