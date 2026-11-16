@@ -8,6 +8,19 @@
 <meta name="site-kind" content="software">
 <meta name="page-type" content="software">
 <link rel="icon" type="image/svg+xml" href="assets/app/fortius.svg">
+<!-- vista previa al compartir el link (WhatsApp, Facebook, LinkedIn, X): las URL tienen que ser absolutas -->
+<link rel="canonical" href="https://fortiusgymapp.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:site_name" content="Fortius">
+<meta property="og:url" content="https://fortiusgymapp.netlify.app/">
+<meta property="og:title" content="Fortius: software para gimnasios y sus profes">
+<meta property="og:description" content="Rutinas con un QR por rutina, cuotas, estadísticas e informe mensual en PDF. Probalo 20 días gratis.">
+<meta property="og:image" content="https://fortiusgymapp.netlify.app/assets/og-fortius.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fortius, software para gimnasios y sus profes, con el panel de Estadísticas">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..600&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet">
@@ -111,11 +124,14 @@
   /* el QR entero, centrado sobre el mismo fondo del modal de la app (antes el recorte lo cortaba a la derecha) */
   #rutinas .panel--qr { background: #1b1b1b; }
   #rutinas .panel--qr .frame__img { object-fit: contain; object-position: center; }
-  .footer__col a { overflow-wrap: anywhere; }
+  /* el mail del pie corta antes de la arroba (<wbr>), no en la mitad de una palabra */
+  .footer__col a { overflow-wrap: normal; }
+  .footer__legal nav { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
+  .footer__legal a { color: inherit; }
+  .form .aviso-datos a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
-  /* en el celular y entre 1024 y 1279px las preguntas entran en una pantalla: sin la bajada ni la del catálogo (ya está en Precio) */
-  @media (max-width: 639px), (min-width: 1024px) and (max-width: 1279px) { #preguntas .faq-intro, #preguntas .faq__item:nth-child(4) { display: none; } }
-  @media (min-width: 1024px) and (max-width: 1279px) { #preguntas .faq__item:nth-child(6) { display: none; } }
+  /* (antes se escondían preguntas en el celular y entre 1024 y 1279px para que la sección entrara en
+     una pantalla; ahora en esos anchos la sección crece con su contenido, ver "celular" más abajo) */
 
   /* splits: la bajada arranca a la altura del tope de las letras del título */
   #panel .grid--top > p, #informes .grid--top > p { margin-top: 0; padding-top: 9px; }
@@ -125,11 +141,16 @@
   .plan-pagos li { display: flex; justify-content: space-between; gap: var(--s-4); padding: var(--s-2) 0; }
   .plan-pagos .rows__value { font-variant-numeric: tabular-nums; text-align: right; }
 
-  @media (max-width: 1279px) { #precio .plan-para { display: none; } }
-  /* precio + formulario: apilados no entran en una pantalla, van en dos */
-  #precio { --hm: 2; }
-  /* en tablet y hasta 1279px entra en una pantalla sin la lista de lo que incluye (ya está mostrado en las secciones de arriba) */
-  @media (min-width: 640px) and (max-width: 1279px) { #precio .checks { display: none; } }
+  /* precio + formulario apilados (celular y tablet): primero el precio, después el formulario, así el
+     dueño sabe cuánto sale antes de dejar sus datos */
+  @media (max-width: 1023px) {
+    /* el bloque del título y el formulario se "abre" (display: contents) para poder ordenar sus partes:
+       título y bajada, después el precio, después el formulario */
+    #precio .grid--top > .stack-4 { display: contents; }
+    #precio .grid--top > .stack-4 > * { grid-column: 1 / -1; min-width: 0; }
+    #precio .grid--top > .stack-4 > :not(form) { order: -2; }
+    #precio .card--plan { order: -1; }
+  }
 
   /* videos: los dos promocionales, 16:9, con su portada; se descargan solo al tocar play */
   .video-marco { margin-top: var(--s-5); border-radius: var(--r-lg); overflow: hidden; background: #121212; aspect-ratio: 16 / 9; box-shadow: 0 24px 50px -28px rgb(28 23 20 / .5); }
@@ -142,6 +163,27 @@
 
   /* capítulo: la pantalla de Informes, cortada por el marco */
   #informes .frame__img { object-fit: cover; object-position: top left; }
+
+  /* celular: cada sección mide lo que mide su contenido.
+     El sistema de estilos hace que cada sección mida exactamente 1 o 2 pantallas (100lvh). En el
+     celular eso dejaba huecos vacíos cuando el contenido era más corto (los "espacios muertos" al
+     bajar), cortaba lo que no entraba y obligaba a esconder preguntas. El hero queda como estaba. */
+  @media (max-width: 639px) {
+    main > section.section:not(.hero), footer.closing { height: auto; min-height: 0; padding: calc(var(--nav) + var(--s-5)) 0 var(--s-5); }
+    main > section#alumno { min-height: 0; }
+    main > section:not(.hero) > .wrap, footer.closing > .wrap { height: auto; }
+    main > section:not(.hero) > .wrap > .fill { flex: none; }
+    #informes .frame { height: 320px; }
+    footer.closing { padding-bottom: var(--s-6); }
+
+    /* etiqueta "20 días gratis": en dos renglones prolijos, sin partir cada frase */
+    .hero .pill { height: auto; flex-wrap: wrap; justify-content: center; row-gap: 2px; padding: 8px 18px; border-radius: 18px; line-height: 1.3; text-align: center; }
+    .hero .pill > span { white-space: nowrap; }
+
+    /* links del pie con área táctil de 44px */
+    .footer ul { gap: 0; }
+    .footer ul a, .footer__legal a { display: inline-block; padding-block: 11px; }
+  }
 </style>
 </head>
 <body>
@@ -181,7 +223,7 @@
         <p class="hero__lead">El profe arma la rutina desde su catálogo y el alumno la abre con un QR. Vos cobrás y la cuota vence sola a los 30 días.</p>
         <div class="btn-row"><a class="btn btn--primary" href="#prueba">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
       </div>
-      <div class="hero__window" data-fx="grain-gradient" data-fx-seed="11" role="img" aria-label="El panel de Estadísticas de Fortius: entrenaron hoy, cuotas vencidas y el ejercicio más usado">
+      <div class="hero__window" data-fx="grain-gradient" data-fx-seed="11" role="img" aria-label="Fortius en uso: el panel del gimnasio en la computadora y las rutinas del alumno en el celular">
         <div class="ly-piece" aria-hidden="true">
           <picture>
             <source media="(max-width: 639px)" srcset="assets/app/mis-rutinas.webp" width="640" height="690">
@@ -356,7 +398,7 @@
             <label class="field">Cantidad de alumnos<select name="alumnos" required><option value="">Elegí una opción</option><option>Hasta 40</option><option>Entre 41 y 80</option><option>Entre 81 y 150</option><option>Más de 150</option></select></label>
             <label class="field">WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej: 351 555-1234" required></label>
             <div class="btn-row"><button class="btn btn--primary" type="submit">Probá 20 días gratis</button><a class="link" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%92%AA%20Quiero%20arrancar%20la%20prueba%20de%2020%20d%C3%ADas%20en%20mi%20gimnasio.%20%C2%BFC%C3%B3mo%20hacemos%20para%20empezar%20a%20entrenar%20con%20la%20app%3F" target="_blank" rel="noopener">O escribinos por WhatsApp</a></div>
-            <p class="t-small muted">Te escribimos por WhatsApp para activar tu prueba.</p>
+            <p class="t-small muted aviso-datos">Te escribimos por WhatsApp para activar tu prueba. Usamos tus datos solo para eso: <a href="privacidad.html">Política de Privacidad</a>.</p>
           </form>
         </div>
         <article class="card card--plan is-featured span-6 start-7">
@@ -422,11 +464,11 @@
         <div class="span-2 footer__col"><h4>Panel</h4><ul><li><a href="#panel">Alumnos</a></li><li><a href="#panel">Cuotas</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li><li><a href="#alumno">App del alumno</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">2 a 5 cuotas por mes</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
-        <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:fortiusgymapp@gmail.com?subject=Consulta%20sobre%20Fortius">fortiusgymapp@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:fortiusgymapp@gmail.com?subject=Consulta%20sobre%20Fortius">fortiusgymapp<wbr>@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
       </div>
       <div class="footer__legal">
         <span>&copy; 2026 Fortius</span>
-        <div class="socials"></div>
+        <nav aria-label="Legales"><a href="terminos.html">Términos y Condiciones</a><a href="privacidad.html">Política de Privacidad</a></nav>
       </div>
     </div>
   </div>

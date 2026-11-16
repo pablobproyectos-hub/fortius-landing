@@ -22,6 +22,8 @@ Cada `git push` a `main` vuelve a publicar el sitio.
 ## Qué hay adentro
 
 - `index.html`: la página.
+- `terminos.html` y `privacidad.html`: Términos y Condiciones y Política de Privacidad (mismo texto que la app, más el formulario de prueba), con su estilo en `assets/legal.css`.
+- `assets/og-fortius.jpg`: la imagen de vista previa al compartir el link (WhatsApp, redes). Las etiquetas `og:` de `index.html` apuntan a `https://fortiusgymapp.netlify.app`: si cambia el dominio, hay que actualizarlas.
 - `assets/app/`: capturas reales de la app de Fortius (con datos de demostración) y el logo.
 - El resto de `assets/`: el sistema de estilos y animaciones de la skill design-taste-frontend (solo los archivos que la página usa).
 
