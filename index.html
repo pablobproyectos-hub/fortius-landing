@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fortius: software para gimnasios y sus profes</title>
-<meta name="description" content="Fortius es el software para gimnasios: rutinas con un QR por rutina, cuotas, estadísticas e informe mensual en PDF. 20 días gratis, después lo mismo que 2 a 5 cuotas de tu gimnasio por mes.">
+<meta name="description" content="Fortius es el software para gimnasios: rutinas con un QR por rutina, planes por actividad, cuotas, estadísticas e informe mensual en PDF. 20 días gratis, después lo mismo que 2 a 5 cuotas de tu gimnasio por mes.">
 <meta name="site-kind" content="software">
 <meta name="page-type" content="software">
 <link rel="icon" type="image/svg+xml" href="assets/app/fortius.svg">
@@ -108,7 +108,14 @@
   /* pasos: capturas reales de la app en el panel de cada tarjeta */
   #rutinas .panel { --p-h: 336px; background: #121212; }
   @media (min-width: 640px) and (max-width: 1023px) { #rutinas { --h: 2; } }
-  @media (min-width: 1024px) { #rutinas .grid > .card, #alumno .grid > .card { grid-column: auto / span 4; } }
+  @media (min-width: 1024px) { #rutinas .grid > .card { grid-column: auto / span 4; } }
+  /* alumno: 4 capturas del celular. Desde 1280px, las cuatro en fila; entre 1024 y 1279px, de a dos con la
+     captura al ancho de un celular */
+  @media (min-width: 1280px) { #alumno .grid > .card { grid-column: auto / span 3; } }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    #alumno .grid > .card { grid-column: auto / span 6; }
+    #alumno .card > .panel { width: 300px; max-width: 100%; margin-inline: auto; }
+  }
   @media (min-width: 1024px) and (max-width: 1279px) { #rutinas .panel { --p-h: 250px; } }
   @media (max-width: 639px) { #rutinas .panel { --p-h: 260px; } }
   #rutinas .panel .frame__img { object-fit: cover; object-position: left top; }
@@ -124,6 +131,20 @@
   @media (min-width: 640px) and (max-width: 1023px) {
     #alumno .card > .panel { width: 320px; max-width: 100%; margin-inline: auto; }
   }
+  /* gráficos: cada tarjeta de la app entera (ya trae su fondo y su borde), sin recortes */
+  #graficos .card { background: transparent; border: 0; padding: 0; box-shadow: none; }
+  #graficos .card > .panel { --p-h: 0px; min-height: 0; flex: none; margin: 0; border-radius: 16px; background: #121212; box-shadow: 0 0 0 1px rgb(255 255 255 / .06); }
+  #graficos .panel .frame__img { position: static; display: block; width: 100%; height: auto; }
+  #graficos .panel::before, #graficos .panel::after { display: none; }
+  @media (min-width: 640px) { #graficos .grid > .card { grid-column: auto / span 6; } }
+
+  /* paquetes extra: la agenda (computadora) y "Mis turnos" (celular) dentro de sus tarjetas */
+  #extras .panel { background: #121212; }
+  #extras .panel::before, #extras .panel::after { display: none; }   /* sin el brillo del panel sobre la captura */
+  #extras .panel .frame__img { object-fit: cover; object-position: left top; }
+  #extras .panel--cel .frame__img { object-fit: contain; object-position: center top; }
+  @media (min-width: 1024px) { #extras .panel { --p-h: 380px; } }
+
   /* el QR entero, centrado sobre el mismo fondo del modal de la app (antes el recorte lo cortaba a la derecha) */
   #rutinas .panel--qr { background: #1b1b1b; }
   #rutinas .panel--qr .frame__img { object-fit: contain; object-position: center; }
@@ -169,7 +190,7 @@
   h2, .t-h2 { font-size: calc(var(--t-h2) * 1.18); line-height: 1.02; }
   .step-num { font-family: var(--font-display); font-weight: 700; }
 
-  /* franjas oscuras (el mundo de la app: fondo casi negro, naranja): Videos y "Lo que ve tu alumno",
+  /* franjas oscuras (el mundo de la app: fondo casi negro, naranja): Videos, "Lo que ve tu alumno" y Gráficos,
      alternadas con las claras. Las capturas oscuras del celular dejan de ser rectángulos negros sobre
      beige y pasan a fundirse con el fondo. */
   #videos .card, #alumno .card { background: var(--p-inv-surface); border-color: rgb(255 255 255 / .08); }
@@ -228,7 +249,7 @@
      deal: hero centred, nav nav-centre (nav-cards redealt: no photographs), close close-type, footer footer-columns,
            rhythm dark-band (the chapter), buttons solid, mark: the client's own logo (the F from the app), ground sage,
            effect grain-gradient in the hero window, moments none
-     screens: hero 1 · panel (app-frame) 1 · rutinas (steps) 1 · alumno (steps, capturas del celular) 1 · informes (chapter, dark band) 1 · preguntas (faq) 1 · footer.closing 1 -->
+     screens: hero 1 · panel (app-frame) 1 · rutinas (steps) 1 · alumno (steps, capturas del celular) 1 · informes (chapter) 1 · graficos (dark band, capturas de gráficos) 1 · extras (paquetes extra, plan cards) 1 · precio 1 · preguntas (faq) 1 · footer.closing 1 -->
 
 <header class="nav nav--centre">
   <div class="wrap nav__bar">
@@ -239,6 +260,7 @@
       <div class="nav__item"><a class="nav__link" href="#rutinas">Rutinas</a></div>
       <div class="nav__item"><a class="nav__link" href="#alumno">Alumno</a></div>
       <div class="nav__item"><a class="nav__link" href="#informes">Informes</a></div>
+      <div class="nav__item"><a class="nav__link" href="#extras">Extras</a></div>
       <div class="nav__item"><a class="nav__link" href="#precio">Precio</a></div>
       <div class="nav__item"><a class="nav__link" href="#preguntas">Preguntas</a></div>
     </nav>
@@ -275,35 +297,35 @@
     <div class="wrap">
       <div class="grid grid--top">
         <h2 class="span-5" id="panel-h">Cada alumno, su cuota y sus rutinas</h2>
-        <p class="span-6 start-7 muted">Buscás al alumno, ves si la cuota está al día y marcás el pago con el precio de su plan ya cargado. <a class="link" href="#preguntas">Ver cómo se cobra</a></p>
+        <p class="span-6 start-7 muted">Armás tus actividades (Musculación, Pilates, Spinning) con sus planes y descuentos por combo. Buscás al alumno, ves si la cuota está al día y marcás el pago con el monto de sus planes ya sumado. <a class="link" href="#preguntas">Ver cómo se cobra</a></p>
       </div>
-      <div class="ui app fill" data-visual role="img" aria-label="La lista de alumnos con el estado de su cuota y el perfil de Diego Ruiz con el pago de hoy marcado">
+      <div class="ui app fill" data-visual role="img" aria-label="La lista de alumnos con sus planes por actividad y el estado de su cuota, y el perfil de Diego Ruiz con el pago de hoy marcado">
         <div class="app__pane app__pane--list" aria-hidden="true">
           <div class="fx-bar"><b>Clientes</b><span class="sp"></span><small>100 activos</small></div>
           <div class="fx-busca">Buscar por nombre</div>
-          <div class="fx-fila is-on"><b>Diego Ruiz</b><span>Fijo, 3 días por semana</span><span class="fx-chip fx-chip--ok">Al día</span></div>
-          <div class="fx-fila"><b>Sofía Paz</b><span>Pase libre</span><span class="fx-chip fx-chip--venc">Vencida</span></div>
-          <div class="fx-fila"><b>Lucía Fernández</b><span>Fijo, 3 días por semana</span><span class="fx-chip fx-chip--ok">Al día</span></div>
-          <div class="fx-fila"><b>Tomás Gil</b><span>Fijo, 2 días por semana</span><span class="fx-chip fx-chip--venc">Vencida</span></div>
-          <div class="fx-fila"><b>Martina Ríos</b><span>Fijo, 4 días por semana</span><span class="fx-chip fx-chip--pv">Vence en 3 días</span></div>
-          <div class="fx-fila"><b>Nicolás Vega</b><span>Pase libre</span><span class="fx-chip fx-chip--ok">Al día</span></div>
-          <div class="fx-fila"><b>Camila Sosa</b><span>Fijo, 2 días por semana</span><span class="fx-chip fx-chip--ok">Al día</span></div>
-          <div class="fx-fila"><b>Julián Moreno</b><span>Fijo, 3 días por semana</span><span class="fx-chip fx-chip--pv">Vence en 6 días</span></div>
-          <div class="fx-fila"><b>Valentina Luna</b><span>Pase libre</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila is-on"><b>Diego Ruiz</b><span>Musculación 3 días + Pilates 2 días</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Sofía Paz</b><span>Musculación, pase libre</span><span class="fx-chip fx-chip--venc">Vencida</span></div>
+          <div class="fx-fila"><b>Lucía Fernández</b><span>Pilates 3 días</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Tomás Gil</b><span>Musculación 2 días</span><span class="fx-chip fx-chip--venc">Vencida</span></div>
+          <div class="fx-fila"><b>Martina Ríos</b><span>Spinning 2 días + Musculación 2 días</span><span class="fx-chip fx-chip--pv">Vence en 3 días</span></div>
+          <div class="fx-fila"><b>Nicolás Vega</b><span>Musculación, pase libre</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Camila Sosa</b><span>Spinning 3 días</span><span class="fx-chip fx-chip--ok">Al día</span></div>
+          <div class="fx-fila"><b>Julián Moreno</b><span>Musculación 3 días</span><span class="fx-chip fx-chip--pv">Vence en 6 días</span></div>
+          <div class="fx-fila"><b>Valentina Luna</b><span>Pilates 2 días</span><span class="fx-chip fx-chip--ok">Al día</span></div>
         </div>
         <div class="app__pane app__pane--open" aria-hidden="true">
-          <div class="fx-bar"><b>Diego Ruiz</b><span class="sp"></span><small>Documento 32456789</small></div>
+          <div class="fx-bar"><b>Diego Ruiz</b><span class="sp"></span><small>Musculación 3 días + Pilates 2 días</small></div>
           <div class="fx-abierto">
             <div class="fx-tarjeta">
               <h4>Cuota</h4>
               <div class="fx-campos">
-                <div class="fx-campo">Monto cobrado ($)<div>40000</div></div>
+                <div class="fx-campo">Monto cobrado ($)<div>58500</div></div>
                 <div class="fx-campo">Método de pago<div>Transferencia</div></div>
               </div>
               <div class="fx-botones"><span class="fx-btn fx-btn--primario">Marcar como pagado</span><span class="fx-txt">Deshacer último pago</span></div>
               <div class="fx-pagos">
-                <div class="is-new">05/11/2026<span>$ 40.000 · Transferencia</span></div>
-                <div>02/10/2026<span>$ 40.000 · Efectivo</span></div>
+                <div class="is-new">05/11/2026<span>$ 58.500 · Transferencia</span></div>
+                <div>02/10/2026<span>$ 58.500 · Efectivo</span></div>
                 <div>01/09/2026<span>$ 38.000 · Efectivo</span></div>
                 <div>01/08/2026<span>$ 38.000 · Efectivo</span></div>
               </div>
@@ -378,13 +400,18 @@
     <div class="wrap">
       <div class="grid grid--top">
         <h2 class="span-5" id="alumno-h">Lo que ve tu alumno en su celular</h2>
-        <p class="span-6 start-7 muted">Entra con el QR y su documento, sin instalar nada. Desde ahí ve sus rutinas, su progreso y sus pagos.</p>
+        <p class="span-6 start-7 muted">Entra con el QR y su documento, sin descargar nada. Si quiere, la agrega al inicio del celular con el ícono de tu gimnasio y le llegan avisos, como cuando le cargás una rutina nueva. Ver cuántos días vino lo ayuda a no cortar la racha.</p>
       </div>
       <div class="grid" style="margin-top: var(--s-7)">
         <article class="card card--row span-4">
           <h3>Sus rutinas del día</h3>
           <p>Elige la rutina de hoy y ve cuándo vence su cuota.</p>
           <div class="panel"><img class="frame__img" src="assets/app/alumno-rutinas.webp" alt="Mis rutinas en el celular de Diego: Empuje, Tracción y Piernas, con 6 días para el vencimiento de su cuota" width="640" height="1359" loading="lazy" data-source="client" data-subject="Fortius, rutinas del alumno"></div>
+        </article>
+        <article class="card card--row span-4">
+          <h3>Su asistencia</h3>
+          <p>Los días que vino este mes y esta semana, su racha y el calendario del mes.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/alumno-asistencia.webp" alt="Tu actividad en el celular de Natalia: 8 días este mes, 4 esta semana, racha de 24 semanas y 2,6 días por semana, con el calendario de noviembre debajo" width="640" height="1360" loading="lazy" data-source="client" data-subject="Fortius, asistencia del alumno"></div>
         </article>
         <article class="card card--row span-4">
           <h3>Su progreso</h3>
@@ -404,7 +431,7 @@
     <div class="wrap">
       <div class="grid grid--top">
         <h2 class="span-5" id="informes-h">Estadísticas e informe del mes</h2>
-        <p class="span-6 start-7 muted">Quién entrenó hoy, quién debe la cuota y quién dejó de venir. Cada mes se cierra solo en un informe que bajás en PDF. <a class="link" href="#preguntas">Ver qué incluye</a></p>
+        <p class="span-6 start-7 muted">Quién entrenó hoy, quién debe la cuota y quién dejó de venir, con gráficos de recaudación, altas y bajas y horarios pico. Cada mes se cierra solo en un informe que bajás en PDF. <a class="link" href="#graficos">Ver los gráficos</a></p>
       </div>
       <div class="frame frame--hero fill" style="margin-top: var(--s-8)">
         <img class="frame__img" src="assets/app/informes.webp" alt="La pantalla de Informes de Fortius con noviembre en curso y los meses cerrados para descargar en PDF" width="1760" height="794" loading="lazy" data-source="client" data-subject="Fortius, pantalla de Informes">
@@ -412,8 +439,70 @@
       <div class="grid" style="margin-top: var(--s-7)">
         <div class="span-3"><p class="t-card">Entrenaron hoy</p><p class="muted">Y en lo que va de la semana.</p></div>
         <div class="span-3"><p class="t-card">Cuotas vencidas</p><p class="muted">Y las que vencen en 7 días.</p></div>
-        <div class="span-3"><p class="t-card">Racha de entrenamiento</p><p class="muted">Semanas seguidas de cada alumno.</p></div>
+        <div class="span-3"><p class="t-card">Gráficos del gimnasio</p><p class="muted">Recaudación por mes y días y horarios pico.</p></div>
         <div class="span-3"><p class="t-card">Informe en PDF</p><p class="muted">Activos, asistencia y lo cobrado.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="graficos" aria-labelledby="graficos-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="graficos-h">Gráficos de tu gimnasio</h2>
+        <p class="span-6 start-7 muted">En Estadísticas, un desplegable con los gráficos: cuánto cobrás cada mes, qué días se llena el gimnasio, quién está al día y cuántos entran y se van. También asistencia por semana, ejercicios más usados, edades y métodos de pago.</p>
+      </div>
+      <div class="grid" style="margin-top: var(--s-7)">
+        <article class="card card--grafico span-6">
+          <div class="panel"><img class="frame__img" src="assets/app/grafico-recaudacion.webp" alt="Gráfico de barras de la recaudación por mes, de mayo a noviembre: $6.903.000 en 185 pagos en los últimos 12 meses" width="912" height="724" loading="lazy" data-source="client" data-subject="Fortius, gráfico de recaudación"></div>
+        </article>
+        <article class="card card--grafico span-6">
+          <div class="panel"><img class="frame__img" src="assets/app/grafico-pico.webp" alt="Gráfico de visitas por día de la semana: jueves y sábado son los días con más gente" width="912" height="862" loading="lazy" data-source="client" data-subject="Fortius, gráfico de días y horarios pico"></div>
+        </article>
+        <article class="card card--grafico span-6">
+          <div class="panel"><img class="frame__img" src="assets/app/grafico-cuotas.webp" alt="Gráfico de anillo con el estado de las cuotas: al día, por vencer en 7 días, vencidas y sin pagos registrados" width="912" height="725" loading="lazy" data-source="client" data-subject="Fortius, gráfico de estado de cuotas"></div>
+        </article>
+        <article class="card card--grafico span-6">
+          <div class="panel"><img class="frame__img" src="assets/app/grafico-altas.webp" alt="Gráfico de altas y bajas a 30, 60 y 90 días: 8, 9 y 11 altas contra 3, 4 y 6 bajas" width="912" height="724" loading="lazy" data-source="client" data-subject="Fortius, gráfico de altas y bajas"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="extras" aria-labelledby="extras-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="extras-h">Paquetes extra</h2>
+        <p class="span-6 start-7 muted">Lo que no todos los gimnasios usan va aparte: lo sumás solo si te sirve. Cada paquete tiene un precio fijo por mes que se suma al de Fortius.</p>
+      </div>
+      <div class="grid" style="margin-top: var(--s-7)">
+        <article class="card card--plan span-5">
+          <h3>Turnos y horarios</h3>
+          <p class="muted">Para las clases con cupo: Pilates, Spinning, funcional o lo que dictes.</p>
+          <p class="price"><span class="t-stat">A definir</span><span class="muted">precio fijo por mes</span></p>
+          <ul class="checks">
+            <li>Horarios de cada actividad por día, con su cupo, y días sin clases por feriado o cierre</li>
+            <li>Turnos fijos de cada alumno, hasta los días de su plan</li>
+            <li>Agenda de la semana con quién viene a cada clase</li>
+            <li>El alumno marca “No voy” y recupera la clase otro día donde haya lugar</li>
+            <li>Avisos al celular: clase suspendida, lugar libre para recuperar y quién avisó que no va</li>
+            <li>Gráfico de ocupación de cada horario</li>
+          </ul>
+        </article>
+        <article class="card card--row span-7">
+          <h3>La agenda de cada día</h3>
+          <p>Quién viene a cada clase, quién avisó que no va y quién recupera. Anotás a alguien o cerrás una clase con un toque.</p>
+          <div class="panel"><img class="frame__img" src="assets/app/turnos-agenda.webp" alt="La Agenda del miércoles 25 de noviembre: Pilates de 8 con una alumna que avisó que no va, Pilates de 18 con una alumna que recupera y Spinning de 19:15 con 8 de 12 lugares ocupados" width="1760" height="1880" loading="lazy" data-source="client" data-subject="Fortius, agenda de turnos"></div>
+        </article>
+        <article class="card card--row span-7">
+          <h3>El alumno avisa desde el celular</h3>
+          <p>Ve sus próximas clases y toca “No voy”. Ese lugar queda libre y se gana una clase para recuperar.</p>
+          <div class="panel panel--cel"><img class="frame__img" src="assets/app/turnos-alumno.webp" alt="Mis turnos en el celular de Natalia: Pilates el lunes 23, el miércoles 25 marcado como No voy y el viernes 27" width="640" height="1000" loading="lazy" data-source="client" data-subject="Fortius, Mis turnos del alumno"></div>
+        </article>
+        <article class="card card--plan span-5">
+          <h3>¿Necesitás otra cosa?</h3>
+          <p class="muted">Si tu gimnasio tiene una forma de trabajar que la app todavía no cubre, contanos. Lo vemos juntos y, si suma, lo armamos como un paquete nuevo.</p>
+          <a class="btn btn--secondary" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%92%AA%20Mi%20gimnasio%20necesita%20algo%20que%20no%20est%C3%A1%20en%20la%20app.%20%C2%BFLo%20charlamos%3F" target="_blank" rel="noopener">Contanos por WhatsApp</a>
+        </article>
       </div>
     </div>
   </section>
@@ -448,7 +537,7 @@
             <li><span class="rows__name">De 81 a 150 alumnos</span><span class="rows__value">4 cuotas</span></li>
             <li><span class="rows__name">Más de 150 alumnos</span><span class="rows__value">5 cuotas</span></li>
           </ul>
-          <p class="t-small muted">Cada cuota vale lo que tu segundo plan más caro, con un mínimo de $40.000 por cuota. Si subís tu cuota, el precio acompaña: no hay otros aumentos. Pagando 6 meses, 10% menos; 12 meses, 20% menos.</p>
+          <p class="t-small muted">Cada cuota vale lo que tu segundo plan más caro, con un mínimo de $40.000 por cuota. Cuentan los planes de todas tus actividades, sin los descuentos por combo. Si subís tu cuota, el precio acompaña: no hay otros aumentos. Pagando 6 meses, 10% menos; 12 meses, 20% menos. Los <a class="link" href="#extras">paquetes extra</a> se suman aparte.</p>
           <!-- Ejemplos con la regla de backend/src/config/precioFortius.js (mínimo POR cuota). -->
           <div class="plan-ejemplo">
             <p class="plan-ejemplo__titulo">Por ejemplo</p>
@@ -457,9 +546,11 @@
           </div>
           <ul class="checks">
             <li>Alumnos y cuotas, con aviso de vencimiento</li>
+            <li>Planes por actividad y descuentos por combo</li>
             <li>Rutinas desde tu catálogo, con video y un QR por rutina</li>
             <li>Registro de pesos y progreso del alumno</li>
-            <li>Estadísticas e informe mensual en PDF</li>
+            <li>Estadísticas con gráficos e informe mensual en PDF</li>
+            <li>App con el ícono de tu gimnasio y avisos al celular</li>
             <li>Varios entrenadores en la misma cuenta</li>
           </ul>
         </article>
@@ -476,9 +567,10 @@
           <a class="link" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
         </div>
         <div class="faq span-6 start-7">
-          <div class="faq__item"><h3>¿Mis alumnos tienen que instalar una app?</h3><p>No. Se abre en el navegador del celular al escanear el QR.</p></div>
+          <div class="faq__item"><h3>¿Mis alumnos tienen que instalar una app?</h3><p>No. Se abre en el navegador del celular al escanear el QR. Si quieren, la agregan al inicio con el ícono de tu gimnasio y reciben avisos.</p></div>
           <div class="faq__item"><h3>¿Cómo entra el alumno la primera vez?</h3><p>Pone su documento una vez y entra directo durante 30 días.</p></div>
           <div class="faq__item"><h3>¿Cómo sé quién debe la cuota?</h3><p>Vence 30 días después del último pago y aparece en Cuotas vencidas.</p></div>
+          <div class="faq__item"><h3>¿Sirve si tengo Pilates, Spinning u otras clases?</h3><p>Sí. Cargás cada actividad con sus planes y precios, y descuentos si combinan. Para turnos con cupo está el paquete <a class="link" href="#extras">Turnos y horarios</a>.</p></div>
           <div class="faq__item"><h3>¿Puedo cargar mis propios ejercicios?</h3><p>Sí. El catálogo es de tu gimnasio, con categorías y video.</p></div>
           <div class="faq__item"><h3>¿Qué pasa cuando terminan los 20 días?</h3><p>Si te sirve, pagás lo mismo que 2 a 5 cuotas de tu gimnasio por mes. Si no, no pagás nada.</p></div>
           <div class="faq__item"><h3>¿Puede haber varios entrenadores?</h3><p>Sí. Cada profe entra con su cuenta y ve los mismos alumnos.</p></div>
@@ -505,8 +597,8 @@
           <p class="footer__lede">Rutinas, cuotas y asistencia de tu gimnasio.</p>
         </div>
         <div class="span-2 footer__col"><h4>Panel</h4><ul><li><a href="#panel">Alumnos</a></li><li><a href="#panel">Cuotas</a></li></ul></div>
-        <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#rutinas">QR por rutina</a></li><li><a href="#alumno">App del alumno</a></li></ul></div>
-        <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">2 a 5 cuotas por mes</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Rutinas</h4><ul><li><a href="#rutinas">Catálogo</a></li><li><a href="#graficos">Gráficos</a></li><li><a href="#rutinas">QR por rutina</a></li><li><a href="#alumno">App del alumno</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Precio</h4><ul><li><a href="#precio">2 a 5 cuotas por mes</a></li><li><a href="#extras">Paquetes extra</a></li><li><a href="#preguntas">Preguntas</a></li></ul></div>
         <div class="span-2 footer__col"><h4>Contacto</h4><ul><li><a href="mailto:fortiusgymapp@gmail.com?subject=Consulta%20sobre%20Fortius">fortiusgymapp<wbr>@gmail.com</a></li><li><a href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">WhatsApp 3571 31-3949</a></li></ul></div>
       </div>
       <div class="footer__legal">
