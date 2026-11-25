@@ -472,13 +472,14 @@
     <div class="wrap">
       <div class="grid grid--top">
         <h2 class="span-5" id="extras-h">Paquetes extra</h2>
-        <p class="span-6 start-7 muted">Lo que no todos los gimnasios usan va aparte: lo sumás solo si te sirve. Cada paquete tiene un precio fijo por mes que se suma al de Fortius.</p>
+        <p class="span-6 start-7 muted">Lo que no todos los gimnasios usan va aparte: lo sumás solo si te sirve. Cada paquete suma 1 cuota más por mes, con la misma cuota que usamos para el precio de Fortius.</p>
       </div>
       <div class="grid" style="margin-top: var(--s-7)">
         <article class="card card--plan span-5">
           <h3>Turnos y horarios</h3>
           <p class="muted">Para las clases con cupo: Pilates, Spinning, funcional o lo que dictes.</p>
-          <p class="price"><span class="t-stat">A definir</span><span class="muted">precio fijo por mes</span></p>
+          <p class="price"><span class="t-stat">+1 cuota</span><span class="muted">por mes</span></p>
+          <p class="t-small muted">Si tu cuota es de $45.000, Turnos suma $45.000 por mes. Mínimo de $40.000, igual que en el <a class="link" href="#precio">precio de Fortius</a>.</p>
           <ul class="checks">
             <li>Horarios de cada actividad por día, con su cupo, y días sin clases por feriado o cierre</li>
             <li>Turnos fijos de cada alumno, hasta los días de su plan</li>
@@ -537,12 +538,13 @@
             <li><span class="rows__name">De 81 a 150 alumnos</span><span class="rows__value">4 cuotas</span></li>
             <li><span class="rows__name">Más de 150 alumnos</span><span class="rows__value">5 cuotas</span></li>
           </ul>
-          <p class="t-small muted">Cada cuota vale lo que tu segundo plan más caro, con un mínimo de $40.000 por cuota. Cuentan los planes de todas tus actividades, sin los descuentos por combo. Si subís tu cuota, el precio acompaña: no hay otros aumentos. Pagando 6 meses, 10% menos; 12 meses, 20% menos. Los <a class="link" href="#extras">paquetes extra</a> se suman aparte.</p>
+          <p class="t-small muted">Cada cuota vale lo que tu segundo plan más caro, con un mínimo de $40.000 por cuota. Cuentan los planes de todas tus actividades, sin los descuentos por combo. Si subís tu cuota, el precio acompaña: no hay otros aumentos. Pagando 6 meses, 10% menos; 12 meses, 20% menos. Cada <a class="link" href="#extras">paquete extra</a> suma 1 cuota más por mes.</p>
           <!-- Ejemplos con la regla de backend/src/config/precioFortius.js (mínimo POR cuota). -->
           <div class="plan-ejemplo">
             <p class="plan-ejemplo__titulo">Por ejemplo</p>
             <p>60 alumnos, cuota de $45.000: <span class="nowrap">3 × $45.000 = <strong>$135.000</strong> por mes.</span></p>
             <p>30 alumnos, cuota de $25.000: <span class="nowrap">2 × $40.000 = <strong>$80.000</strong> por mes.</span></p>
+            <p>60 alumnos, cuota de $45.000 y el paquete de Turnos: <span class="nowrap">(3 + 1) × $45.000 = <strong>$180.000</strong> por mes.</span></p>
           </div>
           <ul class="checks">
             <li>Alumnos y cuotas, con aviso de vencimiento</li>
@@ -571,6 +573,7 @@
           <div class="faq__item"><h3>¿Cómo entra el alumno la primera vez?</h3><p>Pone su documento una vez y entra directo durante 30 días.</p></div>
           <div class="faq__item"><h3>¿Cómo sé quién debe la cuota?</h3><p>Vence 30 días después del último pago y aparece en Cuotas vencidas.</p></div>
           <div class="faq__item"><h3>¿Sirve si tengo Pilates, Spinning u otras clases?</h3><p>Sí. Cargás cada actividad con sus planes y precios, y descuentos si combinan. Para turnos con cupo está el paquete <a class="link" href="#extras">Turnos y horarios</a>.</p></div>
+          <div class="faq__item"><h3>¿Cuánto cuestan los paquetes extra?</h3><p>Cada uno suma 1 cuota más por mes, con la misma cuota que el resto de Fortius. Solo pagás los que activás.</p></div>
           <div class="faq__item"><h3>¿Puedo cargar mis propios ejercicios?</h3><p>Sí. El catálogo es de tu gimnasio, con categorías y video.</p></div>
           <div class="faq__item"><h3>¿Qué pasa cuando terminan los 20 días?</h3><p>Si te sirve, pagás lo mismo que 2 a 5 cuotas de tu gimnasio por mes. Si no, no pagás nada.</p></div>
           <div class="faq__item"><h3>¿Puede haber varios entrenadores?</h3><p>Sí. Cada profe entra con su cuenta y ve los mismos alumnos.</p></div>
