@@ -172,8 +172,9 @@
        título y bajada, después el precio, después el formulario */
     #precio .grid--top > .stack-4 { display: contents; }
     #precio .grid--top > .stack-4 > * { grid-column: 1 / -1; min-width: 0; }
-    #precio .grid--top > .stack-4 > :not(form) { order: -2; }
-    #precio .card--plan { order: -1; }
+    #precio .grid--top > .stack-4 > :not(form) { order: -3; }
+    #precio .card--plan { order: -2; }
+    #precio .grid--top > .stack-4 > .plan-incluye { order: -1; }
   }
 
   /* videos: los dos promocionales, 16:9, con su portada; se descargan solo al tocar play */
@@ -206,6 +207,18 @@
   .plan-ejemplo .plan-ejemplo__titulo { font-weight: 600; }
   .plan-ejemplo .nowrap { white-space: nowrap; }
   .plan-ejemplo strong { font-family: var(--font-display); font-weight: 700; font-size: 1.25em; letter-spacing: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* precio: lo que incluye va en la columna del formulario (en escritorio la tarjeta era mucho más
+     alta que esa columna y dejaba un hueco vacío al costado) */
+  .plan-incluye { display: grid; gap: var(--s-4); }
+  .plan-incluye .plan-incluye__titulo { font-weight: 600; margin: 0; }
+
+  /* preguntas: título arriba y las preguntas en dos columnas a todo el ancho (antes iban en media
+     pantalla, con la otra mitad vacía) */
+  @media (min-width: 1024px) {
+    #preguntas .faq--2col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-8); align-content: start; }
+    #preguntas .faq--2col > .faq__item:nth-child(2) { padding-top: 0; }
+  }
 
   /* escritorio grande (1280px o más): cada sección mide AL MENOS una pantalla (o las que pida --h) y
      crece si su contenido no entra, igual que el sistema hace entre 640 y 1279px. Con los títulos
@@ -514,6 +527,18 @@
         <div class="span-6 stack-4">
           <h2 id="precio-h">Precio y prueba de 20 días</h2>
           <p class="t-lead">Probalo 20 días gratis. Después, Fortius te cuesta lo mismo que 2 a 6 cuotas de tu gimnasio, según cuántos alumnos tengas.</p>
+          <div class="plan-incluye">
+            <p class="plan-incluye__titulo">Todo esto, en cualquier escala</p>
+            <ul class="checks">
+              <li>Alumnos y cuotas, con aviso de vencimiento</li>
+              <li>Planes por actividad y descuentos por combo</li>
+              <li>Rutinas desde tu catálogo, con video y un QR por rutina</li>
+              <li>Registro de pesos y progreso del alumno</li>
+              <li>Estadísticas con gráficos e informe mensual en PDF</li>
+              <li>App con el ícono de tu gimnasio y avisos al celular</li>
+              <li>Varios entrenadores en la misma cuenta</li>
+            </ul>
+          </div>
           <!-- Netlify Forms: Netlify detecta este formulario al publicar (data-netlify) y manda cada pedido por mail.
                El campo "subject" fija el asunto del mail; "bot-field" es la trampa para bots (netlify-honeypot). -->
           <form class="form" id="prueba" name="prueba" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
@@ -547,15 +572,6 @@
             <p>30 alumnos, cuota de $25.000: <span class="nowrap">2 × $40.000 = <strong>$80.000</strong> por mes.</span></p>
             <p>60 alumnos, cuota de $45.000 y el paquete de Turnos: <span class="nowrap">(3 + 1) × $45.000 = <strong>$180.000</strong> por mes.</span></p>
           </div>
-          <ul class="checks">
-            <li>Alumnos y cuotas, con aviso de vencimiento</li>
-            <li>Planes por actividad y descuentos por combo</li>
-            <li>Rutinas desde tu catálogo, con video y un QR por rutina</li>
-            <li>Registro de pesos y progreso del alumno</li>
-            <li>Estadísticas con gráficos e informe mensual en PDF</li>
-            <li>App con el ícono de tu gimnasio y avisos al celular</li>
-            <li>Varios entrenadores en la misma cuenta</li>
-          </ul>
         </article>
       </div>
     </div>
@@ -563,13 +579,15 @@
 
   <section class="section" id="preguntas" aria-labelledby="preguntas-h">
     <div class="wrap">
-      <div class="grid grid--top">
-        <div class="span-6 stack-4">
+      <div class="section-head section-head--row">
+        <div>
           <h2 id="preguntas-h">Preguntas frecuentes</h2>
           <p class="muted faq-intro">Lo que nos preguntan los dueños antes de empezar.</p>
-          <a class="link" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
         </div>
-        <div class="faq span-6 start-7">
+        <a class="link" href="https://wa.me/5493571313949?text=%C2%A1Hola%20equipo%20Fortius%21%20%F0%9F%8F%8B%EF%B8%8F%20Tengo%20una%20consulta%20antes%20de%20sumar%20mi%20gimnasio.%20%C2%BFMe%20dan%20una%20mano%3F" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+      </div>
+      <div class="grid">
+        <div class="faq faq--2col span-12">
           <div class="faq__item"><h3>¿Mis alumnos tienen que instalar una app?</h3><p>No. Se abre en el navegador del celular al escanear el QR. Si quieren, la agregan al inicio con el ícono de tu gimnasio y reciben avisos.</p></div>
           <div class="faq__item"><h3>¿Cómo entra el alumno la primera vez?</h3><p>Pone su documento una vez y entra directo durante 30 días.</p></div>
           <div class="faq__item"><h3>¿Cómo sé quién debe la cuota?</h3><p>Vence 30 días después del último pago y aparece en Cuotas vencidas.</p></div>
