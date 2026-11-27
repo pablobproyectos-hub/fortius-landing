@@ -29,7 +29,7 @@ Cada `git push` a `main` vuelve a publicar el sitio.
 
 ## Pedidos de prueba (Netlify Forms)
 
-"Probá 20 días gratis" lleva al formulario de la sección Precio (`#prueba`): nombre, gimnasio, cantidad de alumnos y WhatsApp. Netlify lo detecta solo al publicar (`data-netlify="true"`) y, al enviarlo, el visitante ve `gracias.html`.
+Los botones "Probá 20 días gratis" llevan al principio de la sección Precio (`#precio`), donde está el formulario de prueba (`#prueba`): nombre, gimnasio, cantidad de alumnos y WhatsApp. Netlify lo detecta solo al publicar (`data-netlify="true"`) y, al enviarlo, el visitante ve `gracias.html`.
 
 Para que cada pedido te llegue por mail: en Netlify, **Site configuration → Forms → Form notifications → Add notification → Email notification**, formulario `prueba`, tu mail. El asunto es "Nuevo pedido de prueba de Fortius". Todos los pedidos quedan además en la pestaña **Forms** del sitio.
 

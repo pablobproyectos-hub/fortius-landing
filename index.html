@@ -56,10 +56,27 @@
   .nav__logo svg, .footer__mark svg { width: 28px; height: 28px; flex: none; }
   .nav__logo, .footer__mark { display: inline-flex; align-items: center; gap: 10px; }
 
-  /* hero: la ventana del panel real del entrenador sobre el fondo iluminado */
-  .hero__window .shot { display: block; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 1px rgb(0 0 0 / .35), 0 30px 60px -24px rgb(28 23 20 / .55); }
-  .hero__window .ly-piece { width: min(100% - 48px, 1100px); }
-  @media (max-width: 639px) { .hero__window .ly-piece { width: min(100% - 48px, 300px); } }
+  /* hero: el lema de Fortius sobre el fondo iluminado y, al lado, el celular del alumno que asoma
+     desde abajo. Los tamaños siguen al alto del recuadro (cqh): en pantallas bajas todo se achica
+     junto y el celular se pierde en el desvanecido del pie */
+  .hero--centred .hero__window { container-type: size; }
+  .hero-lema { position: absolute; z-index: 1; inset: 0; width: min(880px, 100% - 2 * var(--s-8)); margin-inline: auto;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s-8); align-items: start; }
+  .hero-lema__texto { align-self: center; padding-bottom: 16cqh; }
+  .hero-lema__frase { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 30cqh, 104px);
+    line-height: .95; letter-spacing: var(--display-tracking); color: var(--ink); text-wrap: balance; }
+  .hero-lema__trad { margin: var(--s-2) 0 0; font-size: clamp(15px, 7cqh, 22px); color: var(--muted); }
+  .hero-lema__cel { margin-top: var(--s-6); width: clamp(160px, 80cqh, 280px); aspect-ratio: 640 / 1359; overflow: hidden;
+    border-radius: 26px; border: 6px solid #0d0d0d; background: #121212;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / .08), 0 30px 60px -20px rgb(28 23 20 / .7); }
+  .hero-lema__cel img { display: block; width: 100%; height: auto; max-width: none; }
+  @media (max-width: 639px) {
+    .hero-lema { width: calc(100% - 2 * var(--s-4)); grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .hero-lema__texto { align-self: start; padding: var(--s-5) 0 0; }
+    .hero-lema__frase { font-size: clamp(36px, 12cqw, 52px); }
+    .hero-lema__trad { font-size: 15px; }
+    .hero-lema__cel { margin-top: var(--s-4); width: min(62%, 220px); border-radius: 22px; border-width: 5px; }
+  }
 
   /* app-frame: la app real de Fortius como HTML vivo (sus colores: #121212, #1b1b1b, naranja #ff5a1f) */
   .app.ui { --u-bg: #121212; --u-border: #333; --u-line: #2b2b2b; --u-r: 16px; --u-shadow: 0 30px 60px -28px rgb(28 23 20 / .5);
@@ -278,7 +295,7 @@
       <div class="nav__item"><a class="nav__link" href="#preguntas">Preguntas</a></div>
     </nav>
     <div class="nav__actions">
-      <a class="btn btn--primary" href="#prueba">Probá 20 días gratis</a>
+      <a class="btn btn--primary" href="#precio">Probá 20 días gratis</a>
     </div>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú">
       <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -290,17 +307,18 @@
   <section class="hero hero--centred" aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text">
       <div class="hero__c">
-        <a class="pill" href="#precio"><span>20 días gratis</span><span class="muted">Después, lo que pagan 2 a 5 alumnos</span></a>
+        <a class="pill" href="#precio"><span>20 días gratis</span><span class="muted">Después, lo que pagan 2 a 6 alumnos</span></a>
         <h1 id="hero-h">Software para gimnasios y sus profes</h1>
         <p class="hero__lead">El profe arma la rutina desde su catálogo y el alumno la abre con un QR. Vos cobrás y la cuota vence sola a los 30 días.</p>
-        <div class="btn-row"><a class="btn btn--primary" href="#prueba">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
+        <div class="btn-row"><a class="btn btn--primary" href="#precio">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#panel">Ver el panel</a></div>
       </div>
-      <div class="hero__window" data-fx="grain-gradient" data-fx-seed="11" role="img" aria-label="Fortius en uso: el panel del gimnasio en la computadora y las rutinas del alumno en el celular">
-        <div class="ly-piece" aria-hidden="true">
-          <picture>
-            <source media="(max-width: 639px)" srcset="assets/app/mis-rutinas.webp" width="640" height="690">
-            <img class="shot" src="assets/app/estadisticas.webp" alt="" width="1760" height="1100" fetchpriority="high" data-source="client" data-subject="Fortius, pantalla de Estadísticas">
-          </picture>
+      <div class="hero__window" data-fx="grain-gradient" data-fx-seed="11">
+        <div class="hero-lema">
+          <div class="hero-lema__texto">
+            <p class="hero-lema__frase" lang="la">Fortius cotidie</p>
+            <p class="hero-lema__trad">Cada día más fuerte</p>
+          </div>
+          <div class="hero-lema__cel" aria-hidden="true"><img src="assets/app/alumno-rutinas.webp" alt="" width="640" height="1359" fetchpriority="high" data-source="client" data-subject="Fortius, Mis rutinas en el celular del alumno"></div>
         </div>
       </div>
     </div></div>
@@ -609,7 +627,7 @@
         <h2 id="close-h">Probá Fortius 20 días gratis</h2>
         <p class="t-small muted">Después, lo mismo que 2 a 6 cuotas por mes para todo tu gimnasio.</p>
       </div>
-      <a class="btn btn--primary btn--xl btn--wide" href="#prueba">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      <a class="btn btn--primary btn--xl btn--wide" href="#precio">Probá 20 días gratis<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
     </div>
     <div class="closing__links">
       <div class="grid">
